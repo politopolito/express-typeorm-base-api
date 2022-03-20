@@ -34,8 +34,10 @@ module.exports = {
 		}
 	},
 	rules: {
+		"no-console": "off", // FOR TESTING ONLY
+		"no-param-reassign": "off",
 		curly: "error",
-		quotes: [ "error", "double" ],
+		"@typescript-eslint/quotes": [ "error", "double", { "avoidEscape": true, "allowTemplateLiterals": true } ],
 		"array-bracket-spacing": [ "error", "always" ],
 		"object-curly-newline": "error",
 		"object-curly-spacing": [ "error", "always", { "arraysInObjects": true } ],

@@ -7,3 +7,6 @@ dist
 
 # yarn
 yarn-error.log
+
+# secrets
+.env

@@ -1,10 +1,27 @@
-import express from "express";
+import os from "os";
+import cluster from "cluster";
+import App from "./providers/App";
 
-const app = express();
-const PORT = 3000;
+function initSingleNode(): void {
+  App.loadServer();
+}
 
-app.get("/", (req, res) => res.send("Test"));
+// eslint-disable-next-line
+function initCluster(): void {
+  if (cluster.isPrimary) {
+    const CPUS = os.cpus();
+    CPUS.forEach(() => cluster.fork());
 
-app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
-});
+    /**
+     * Run Worker periodically
+     */
+    setTimeout(() => App.loadWorker(), 1000 * 10);
+  } else {
+    /**
+     * Run the Server on Clusters
+     */
+    App.loadServer();
+  }
+}
+
+initSingleNode();

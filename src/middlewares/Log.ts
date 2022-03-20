@@ -1,3 +1,4 @@
+/* eslint-disable  no-console */
 class Log {
   public linePrefix: string;
 
@@ -9,11 +10,11 @@ class Log {
     this.linePrefix = `[${dateString} ${timeString}`;
   }
 
-  public info = (msg: string): void => console.log(msg);
+  public info = (msg: string): void => console.log(`[${this.linePrefix}] ${msg}`);
 
-  public warn = (msg: string): void => console.warn(msg);
+  public warn = (msg: string): void => console.warn(`[${this.linePrefix}] ${msg}`);
 
-  public error = (msg: string): void => console.error(msg);
+  public error = (msg: string): void => console.error(`[${this.linePrefix}] ${msg}`);
 }
 
-export default new Log;
+export default new Log();
