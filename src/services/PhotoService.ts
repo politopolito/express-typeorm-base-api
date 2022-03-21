@@ -1,10 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { IService } from "../types/IService";
 import PhotoRepository from "../repositories/PhotoRepository";
-import Database from "../providers/Database";
 import Photo from "../entities/Photo";
 import PhotoCreateValidator from "../validators/Photo/PhotoCreateValidator";
-import { Repository } from "typeorm";
 
 export default class PhotoService implements IService<Photo>{
   private static getRepository(): ReturnType<typeof PhotoRepository> {
