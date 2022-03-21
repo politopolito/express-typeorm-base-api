@@ -3,6 +3,7 @@ import Daemon from "../middlewares/Daemon";
 import Log from "../utils/Log";
 import Config from "./Config";
 import Routes from "./Routes";
+import Database from "./Database";
 
 /**
  * Concrete Factory
@@ -19,6 +20,7 @@ class Express {
   constructor() {
     this.express = express();
     this.mountLocalConfig();
+    Express.mountDatabase();
     this.mountRoutes();
     this.mountMiddlewares();
   }
@@ -28,7 +30,7 @@ class Express {
    * @private
    */
   private mountLocalConfig(): void {
-    Config.mount(this.express);
+    Config.init(this.express);
   }
 
   /**
@@ -44,7 +46,15 @@ class Express {
    * @private
    */
   private mountRoutes(): void {
-    Routes.mount(this.express);
+    Routes.init(this.express);
+  }
+
+  /**
+   * Initialize database connection
+   * @private
+   */
+  private static mountDatabase(): void {
+    Database.init();
   }
 
   /**

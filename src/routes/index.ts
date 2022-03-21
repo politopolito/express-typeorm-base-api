@@ -1,8 +1,10 @@
 import { Router } from "express";
-import homeRouter from "./Home";
+import HomeRouter from "./HomeRouter";
+import PhotoRouter from "./PhotoRouter";
 
 const router = Router();
 
-router.use(homeRouter);
+router.use(new PhotoRouter().router);
+router.use(new HomeRouter().router);
 
 export default router;

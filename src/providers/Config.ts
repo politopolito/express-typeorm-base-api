@@ -11,6 +11,13 @@ type AppConfig = {
   isCORSEnabled: boolean;
   appURL: string;
   apiPrefix: string;
+  databaseUser: string;
+  databasePassword: string;
+  databaseHost: string;
+  databasePort: number;
+  databaseName: string;
+  databaseSynchronize: boolean;
+  databaseLogging: boolean;
 };
 
 class Config implements IMiddleware {
@@ -26,9 +33,16 @@ class Config implements IMiddleware {
         appDescription: process.env.APP_DESCRIPTION || "Welcome to my app",
         port: !Number.isNaN(Number(process.env.PORT)) ? Number(process.env.PORT) : 4000,
         appSecret: process.env.APP_SECRET,
-        isCORSEnabled: !!process.env.CORS_ENABLED,
+        isCORSEnabled: Boolean(process.env.CORS_ENABLED),
         appURL: process.env.APP_URL || "localhost",
         apiPrefix: process.env.API_PREFIX || "",
+        databaseUser: process.env.DATABASE_USERNAME || "postgres",
+        databasePassword: process.env.DATABASE_PASSWORD || "postgres",
+        databaseHost: process.env.DATABASE_HOST || "localhost",
+        databasePort: !Number.isNaN(Number(process.env.DATABASE_PORT)) ? Number(process.env.DATABASE_PORT) : 5632,
+        databaseName: process.env.DATABASE_NAME || "mydb",
+        databaseLogging: Boolean(process.env.DATABASE_LOGGING),
+        databaseSynchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
       };
     }
 
@@ -39,7 +53,7 @@ class Config implements IMiddleware {
    * Initializes dotenv and injects your config into the app's locals
    * @param _express
    */
-  public static mount(_express: Application) {
+  public static init(_express: Application) {
     dotenv.config({ path: path.join(__dirname, "../../.env") });
     _express.locals.app = this.config();
   }
