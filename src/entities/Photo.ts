@@ -1,7 +1,9 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
-import PhotoValidator from "../validators/Photo/PhotoValidator";
+import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
 
-export default class Photo extends PhotoValidator {
+// import PhotoValidator from "../validators/Photo/PhotoValidator";
+
+@Entity()
+export default class Photo {
   @PrimaryGeneratedColumn()
     id: number;
 
@@ -14,6 +16,6 @@ export default class Photo extends PhotoValidator {
   @Column()
     filename: string;
 
-  @Column()
+  @Column({ default: false })
     isPublic: boolean;
 }

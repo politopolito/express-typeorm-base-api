@@ -4,7 +4,7 @@ import PhotoRouter from "./PhotoRouter";
 
 const router = Router();
 
-router.use(new PhotoRouter().router);
-router.use(new HomeRouter().router);
+router.use((new PhotoRouter()).router);
+router.use((new HomeRouter()).router);
 
 export default router;

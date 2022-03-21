@@ -6,15 +6,15 @@ export default class PhotoCreateValidator extends PhotoValidator {
   @IsString()
   @IsNotEmpty()
   @Transform(value => String(value)?.trim())
-  public name: string;
+  declare public name: string;
 
   @IsString()
   @IsNotEmpty()
   @Transform(value => String(value)?.trim())
-  public filename: string;
+  declare public filename: string;
 
   @IsString()
   @IsNotEmpty()
   @Transform(value => String(value)?.trim())
-  public description: string;
+  declare public description: string;
 }

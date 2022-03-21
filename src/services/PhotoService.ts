@@ -4,10 +4,11 @@ import PhotoRepository from "../repositories/PhotoRepository";
 import Database from "../providers/Database";
 import Photo from "../entities/Photo";
 import PhotoCreateValidator from "../validators/Photo/PhotoCreateValidator";
+import { Repository } from "typeorm";
 
 export default class PhotoService implements IService<Photo>{
-  private static getRepository(): PhotoRepository {
-    return Database.getConnection().getCustomRepository(PhotoRepository);
+  private static getRepository(): ReturnType<typeof PhotoRepository> {
+    return PhotoRepository();
   }
 
   public async getById(id: number): Promise<Photo> {
@@ -15,6 +16,7 @@ export default class PhotoService implements IService<Photo>{
   }
 
   public async create(payload: PhotoCreateValidator): Promise<Photo> {
+    console.log(payload);
     return PhotoService.getRepository().save({ ...payload });
   }
 }

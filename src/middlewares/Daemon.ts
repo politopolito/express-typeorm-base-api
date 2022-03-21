@@ -1,4 +1,4 @@
-import { Application } from "express";
+import { Application, json } from "express";
 import Config from "../providers/Config";
 import CORS from "./CORS";
 import Http from "./Http";
@@ -15,10 +15,12 @@ class Daemon implements IMiddleware {
       CORS.mount(_express);
     }
 
+    _express.use(json());
+
     Http.mount(_express);
 
     // Error handling middleware should be mounted last
-    Daemon.mountErrorHandling(_express);
+    // Daemon.mountErrorHandling(_express);
   };
 
   private static mountErrorHandling(_express: Application) {

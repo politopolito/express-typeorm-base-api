@@ -1,15 +1,25 @@
+import { Router } from "express";
 import PhotoController from "../controllers/PhotoController";
 import IRouter from "../types/IRouter";
-import Validator from "../middlewares/Validator";
+// import Validator from "../middlewares/Validator";
 import PhotoCreateValidator from "../validators/Photo/PhotoCreateValidator";
+import myValidator from "../middlewares/Validator";
 
-class PhotoRouter extends IRouter {
+class PhotoRouter implements IRouter {
   public path = "/photos";
+
+  public router: Router;
+
   private photoController = new PhotoController();
 
-  protected initializeRoutes() {
-    this.router.get(`${this.path}/:id(\\d+`, this.photoController.getById);
-    this.router.post(this.path, Validator.mount(PhotoCreateValidator), this.photoController.create);
+  constructor() {
+    this.router = Router();
+    this.initializeRoutes();
+  }
+
+  initializeRoutes() {
+    this.router.get(`${this.path}/:id(\\d+)`, this.photoController.getById);
+    this.router.post(this.path, myValidator(PhotoCreateValidator, true), this.photoController.create);
   }
 }
 

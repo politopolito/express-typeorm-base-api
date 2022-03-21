@@ -1,6 +1,8 @@
+import "reflect-metadata";
 import os from "os";
 import cluster from "cluster";
 import App from "./providers/App";
+import Database from "./providers/Database";
 
 function initSingleNode(): void {
   App.loadServer();
@@ -24,4 +26,5 @@ function initCluster(): void {
   }
 }
 
-initSingleNode();
+Database.init().then(() => initSingleNode());
+

@@ -2,7 +2,7 @@ import {
   IsBoolean, IsInt, IsString,
 } from "class-validator";
 
-export default abstract class PhotoValidator {
+export default class PhotoValidator {
   @IsInt()
     id: number;
 
