@@ -1,12 +1,12 @@
 import { Application } from "express";
 import Config from "./Config";
-import Log from "../middlewares/Log";
+import Log from "../utils/Log";
 import apiRouter from "../routes";
 
 class Routes {
-  public static mountApi(_express: Application): void {
+  public static mount(_express: Application): void {
     Log.info("Routes :: Mounting API Routes...");
-    const apiPrefix = Config.config().apiPrefix;
+    const { apiPrefix } = Config.config();
     _express.use(`${apiPrefix}`, apiRouter);
   }
 }

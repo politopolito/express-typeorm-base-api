@@ -41,5 +41,6 @@ module.exports = {
 		"array-bracket-spacing": [ "error", "always" ],
 		"object-curly-newline": "error",
 		"object-curly-spacing": [ "error", "always", { "arraysInObjects": true } ],
+		"import/no-cycle": "off",
 	}
 };

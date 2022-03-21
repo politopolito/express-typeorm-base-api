@@ -1,4 +1,4 @@
-import Log from "../middlewares/Log";
+import Log from "../utils/Log";
 import Express from "./Express";
 
 class App {

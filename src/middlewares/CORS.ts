@@ -1,17 +1,16 @@
 import { Application } from "express";
 import cors from "cors";
-import Log from "./Log";
+import Log from "../utils/Log";
 import Config from "../providers/Config";
+import IMiddleware from "../types/IMiddleware";
 
-class CORS {
-  public static mount(_express: Application): Application {
-    Log.info("Mounting 'CORS' middleware...");
+class CORS implements IMiddleware {
+  public static mount(_express: Application) {
+    Log.info("Middlewares :: Mounting 'CORS'...");
 
     _express.use(cors({
       origin: Config.config().appURL,
     }));
-
-    return _express;
   }
 }
 

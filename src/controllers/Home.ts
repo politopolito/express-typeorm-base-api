@@ -6,7 +6,7 @@ class HomeController {
     return res.json({
       name: Config.config().appName,
       description: Config.config().appDescription,
-    })
+    });
   }
 }
 

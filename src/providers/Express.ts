@@ -1,6 +1,6 @@
 import express from "express";
 import Daemon from "../middlewares/Daemon";
-import Log from "../middlewares/Log";
+import Log from "../utils/Log";
 import Config from "./Config";
 import Routes from "./Routes";
 
@@ -28,7 +28,7 @@ class Express {
    * @private
    */
   private mountLocalConfig(): void {
-    this.express = Config.init(this.express);
+    Config.mount(this.express);
   }
 
   /**
@@ -36,7 +36,7 @@ class Express {
    * @private
    */
   private mountMiddlewares() {
-    this.express = Daemon.init(this.express);
+    Daemon.mount(this.express);
   }
 
   /**
@@ -44,14 +44,13 @@ class Express {
    * @private
    */
   private mountRoutes(): void {
-    Routes.mountApi(this.express);
+    Routes.mount(this.express);
   }
 
   /**
    * Start the express server
    */
   public init(): void {
-    console.log(this.express.locals.app);
     const { port } = Config.config();
 
     this.express.listen(port, () => {
