@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsString, IsBoolean } from "class-validator";
 import { Transform } from "class-transformer";
 import PhotoValidator from "./PhotoValidator";
 
@@ -14,4 +14,8 @@ export default class PhotoUpdateValidator extends PhotoValidator {
   @IsString()
   @Transform(value => String(value)?.trim())
   declare public description: string;
+
+  @IsBoolean()
+  @Transform(value => Boolean(value))
+  declare public isPublic: boolean;
 }
