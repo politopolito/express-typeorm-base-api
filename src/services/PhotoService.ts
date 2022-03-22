@@ -20,7 +20,6 @@ export default class PhotoService implements IService<Photo>{
   }
 
   public async updateById(id:number, payload: PhotoUpdateValidator): Promise<Photo> {
-    console.log(payload);
     const data = await PhotoService.getRepository().findById(id);
     return PhotoService.getRepository().save({ ...data, ...payload });
   }
