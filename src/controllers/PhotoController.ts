@@ -21,13 +21,22 @@ class PhotoController implements IController {
     const photoId = Number(req.params.id);
     const photoPayload = req.body;
     const photo = await this.photoService.updateById(photoId, photoPayload);
-    res.status(200).json({ data: photo });
+    if(photo){
+      res.status(200).json({ data: photo });
+    } else {
+      res.status(404).json({ error: photo });
+    }
+    
   };
 
   public deleteById: IRequestHandler = async (req, res) => {
     const photoId = Number(req.params.id);
     const photo = await this.photoService.deleteById(photoId);
-    res.status(200).json({ data: photo });
+    if(photo){
+      res.status(200).json({ data: photo });
+    } else {
+      res.status(404).json({ error: photo });
+    }
   };
 }
 

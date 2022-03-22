@@ -21,11 +21,20 @@ export default class PhotoService implements IService<Photo>{
 
   public async updateById(id:number, payload: PhotoUpdateValidator): Promise<Photo> {
     const data = await PhotoService.getRepository().findById(id);
-    return PhotoService.getRepository().save({ ...data, ...payload });
+    if(!data){
+      return null;
+    }else {
+      return PhotoService.getRepository().save({ ...data, ...payload });
+    }
+    
   }
 
   public async deleteById(id:number): Promise<Photo> {
     const data = await PhotoService.getRepository().findById(id);
-    return PhotoService.getRepository().remove(data);
+    if(!data){
+      return null;
+    }else {
+      return PhotoService.getRepository().remove(data);
+    }
   }
 }
