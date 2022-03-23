@@ -2,6 +2,9 @@ import { createConnection, getConnection as getTypeOrmConnection } from "typeorm
 import Log from "../utils/Log";
 import Config from "./Config";
 
+/**
+ * Handles database connection
+ */
 class Database {
   public static init(): Promise<void> {
     Log.info("Database :: Connecting...");

@@ -1,3 +1,6 @@
+/**
+ * General purpose HTTP Exception
+ */
 export default class HttpException extends Error {
   public status: number;
 

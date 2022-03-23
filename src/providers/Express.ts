@@ -3,9 +3,10 @@ import Daemon from "../middlewares/Daemon";
 import Log from "../utils/Log";
 import Config from "./Config";
 import Routes from "./Routes";
+import ErrorHandler from "../middlewares/ErrorHandler";
 
 /**
- * Concrete Factory
+ * Express Factory
  */
 class Express {
   /**
@@ -21,6 +22,7 @@ class Express {
     this.mountLocalConfig();
     this.mountMiddlewares();
     this.mountRoutes();
+    this.mountErrorHandling();
   }
 
   /**
@@ -45,6 +47,13 @@ class Express {
    */
   private mountRoutes(): void {
     Routes.init(this.express);
+  }
+
+  /**
+   * Mount error handling
+   */
+  private mountErrorHandling() {
+    ErrorHandler.mount(this.express);
   }
 
   /**
