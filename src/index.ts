@@ -1,15 +1,21 @@
 import "reflect-metadata";
+import "express-async-errors";
 import os from "os";
 import cluster from "cluster";
 import App from "./providers/App";
 import Database from "./providers/Database";
 
+/**
+ * Start development application running on single thread.
+ */
 function initSingleNode(): void {
   App.loadServer();
 }
 
-// eslint-disable-next-line
-function initCluster(): void {
+/**
+ * Run production-ready application on cluster mode.
+ */
+function initCluster(): void { // eslint-disable-line
   if (cluster.isPrimary) {
     const CPUS = os.cpus();
     CPUS.forEach(() => cluster.fork());
@@ -26,5 +32,9 @@ function initCluster(): void {
   }
 }
 
+/**
+ * Establish database connection
+ * then init server using either development or production-ready config.
+ */
 Database.init().then(() => initSingleNode());
 

@@ -1,7 +1,5 @@
 import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
 
-// import PhotoValidator from "../validators/Photo/PhotoValidator";
-
 @Entity()
 export default class Photo {
   @PrimaryGeneratedColumn()

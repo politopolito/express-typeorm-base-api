@@ -2,7 +2,10 @@ import { IsNotEmpty, IsString } from "class-validator";
 import { Transform } from "class-transformer";
 import PhotoValidator from "./PhotoValidator";
 
-export default class PhotoCreateValidator extends PhotoValidator {
+/**
+ * Validate photo's create request body
+ */
+export default class PhotoCreateBodyValidator extends PhotoValidator {
   @IsString()
   @IsNotEmpty()
   @Transform(value => String(value)?.trim())
