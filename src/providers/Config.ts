@@ -20,6 +20,9 @@ type AppConfig = {
   databaseLogging: boolean;
 };
 
+/**
+ * Handles injecting environment configuration & secrets
+ */
 class Config implements IMiddleware {
   private static appConfig: AppConfig;
 
@@ -41,7 +44,7 @@ class Config implements IMiddleware {
         databaseHost: process.env.DATABASE_HOST || "localhost",
         databasePort: !Number.isNaN(Number(process.env.DATABASE_PORT)) ? Number(process.env.DATABASE_PORT) : 5632,
         databaseName: process.env.DATABASE_NAME || "mydb",
-        databaseLogging: Boolean(process.env.DATABASE_LOGGING),
+        databaseLogging: process.env.DATABASE_LOGGING.toLowerCase() === "true",
         databaseSynchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
       };
     }

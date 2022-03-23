@@ -10,10 +10,11 @@ class NotFoundHandler implements IMiddleware {
     Log.info("Middlewares :: Mounting 'NotFoundHandler'");
     _express.use("*", (req: Request, res: Response) => {
       const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+      const errorMessage = `Path ${req.originalUrl} not found`;
 
-      Log.error(`Path ${req.originalUrl} not found [IP: ${ip}]`);
+      Log.error(`${errorMessage} [IP: ${ip}]`);
 
-      res.status(404).json({ error: "Page not found" });
+      res.status(404).json({ errorMessage });
     });
   }
 }

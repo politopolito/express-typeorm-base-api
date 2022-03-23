@@ -2,6 +2,9 @@ import { Router } from "express";
 import HomeController from "../controllers/HomeController";
 import IRouter from "../types/IRouter";
 
+/**
+ * Routes for root/home path
+ */
 class HomeRouter implements IRouter {
   public path = "/";
 

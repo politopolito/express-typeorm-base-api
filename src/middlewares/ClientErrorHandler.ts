@@ -4,15 +4,19 @@ import {
 import Log from "../utils/Log";
 import IMiddleware from "../types/IMiddleware";
 import { IRequestErrorHandler } from "../types/IRequestErrorHandler";
+import HttpException from "../exceptions/HttpException";
 
 /**
- * Handle routes errors & exceptions.
+ * Handle exceptions thrown from controllers/services.
  */
 class ClientErrorHandler implements IMiddleware {
   private static handler: IRequestErrorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err) {
-      Log.error(err.stack);
-      res.status(500).json({ error: "Something went wrong!" });
+      if (err instanceof HttpException) {
+        res.status(err.status).json({ errorMessage: err.message });
+      } else {
+        res.status(500).json({ errorMessage: "Something went wrong!" });
+      }
     } else {
       next(err);
     }
