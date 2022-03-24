@@ -27,7 +27,7 @@ class PhotoRouter implements IRouter {
     this.router.get(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoGetParamsValidator), this.photoController.getById);
     this.router.patch(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), BodyValidator(PhotoUpdateBodyValidator), this.photoController.updateById);
     this.router.delete(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), BodyValidator(PhotoUpdateBodyValidator), this.photoController.deleteById);
-    this.router.post(this.path, BodyValidator(PhotoCreateBodyValidator, true), this.photoController.create);
+    this.router.post(this.path, BodyValidator(PhotoCreateBodyValidator, false), this.photoController.create);
   }
 }
 

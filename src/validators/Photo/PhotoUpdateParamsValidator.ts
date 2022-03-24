@@ -8,5 +8,5 @@ export default class PhotoUpdateParamsValidator {
   @IsInt()
   @IsNotEmpty()
   @Type(() => Number)
-  declare public id: number;
+  public id: number;
 }

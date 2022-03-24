@@ -41,7 +41,8 @@ export default class PhotoService implements IService<Photo>{
    * @param photoData
    */
   public async create(photoData: PhotoCreateBodyValidator): Promise<Photo> {
-    return PhotoService.getRepository().save({ ...photoData });
+    const { userId } = photoData;
+    return PhotoService.getRepository().save({ ...photoData, user: { id: userId } });
   }
 
   /**
