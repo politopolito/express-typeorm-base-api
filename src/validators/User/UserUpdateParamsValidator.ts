@@ -2,9 +2,9 @@ import { IsInt, IsNotEmpty } from "class-validator";
 import { Type } from "class-transformer";
 
 /**
- * Validate photo's update request params
+ * Validate user's update request params
  */
-export default class PhotoUpdateParamsValidator {
+export default class UserUpdateParamsValidator {
   @IsInt()
   @IsNotEmpty()
   @Type(() => Number)

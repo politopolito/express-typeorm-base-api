@@ -1,23 +1,24 @@
 import {
-  IsBoolean, IsInt, IsString,
+  IsBoolean, IsNotEmpty, IsOptional, IsString,
 } from "class-validator";
 
 /**
  * Base validator for Photo entity
  */
 export default class PhotoValidator {
-  @IsInt()
-    id: number;
+  @IsString()
+  @IsNotEmpty()
+    name: string;
 
   @IsString()
-    name?: string;
-
-  @IsString()
+  @IsOptional()
     description?: string;
 
   @IsString()
+  @IsNotEmpty()
     filename: string;
 
   @IsBoolean()
-    isPublic?: boolean;
+  @IsOptional()
+    isPublic: boolean;
 }
