@@ -1,12 +1,30 @@
-import { IsString } from "class-validator";
+import {
+  IsEmail, IsEnum, IsOptional, IsString, Validate, 
+} from "class-validator";
+import UserPasswordValidator from "./UserPasswordValidator";
+import { UserRole } from "../../entities/User";
 
 export default class UserValidator {
-  @IsString()
-  public email?: string;
+  @IsEmail()
+  public email: string;
 
   @IsString()
-  public name?: string;
+  public firstName: string;
 
   @IsString()
-  public avatarImg?: string;
+  public lastName: string;
+
+  @IsString()
+  public avatarUrl?: string;
+
+  @Validate(UserPasswordValidator)
+  @IsOptional()
+  public password: string;
+
+  @IsString()
+  @IsOptional()
+  public avatarImg: string;
+
+  @IsEnum(UserRole)
+  public role: UserRole;
 }
