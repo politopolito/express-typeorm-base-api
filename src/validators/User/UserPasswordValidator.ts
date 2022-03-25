@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import { ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 
 @ValidatorConstraint({ name: "userPassword", async: false })
@@ -9,7 +10,6 @@ export default class UserPasswordValidator implements ValidatorConstraintInterfa
     const hasLowerCase = /[a-z]/.test(text);
     const hasUppercase = /[A-Z]/.test(text);
     const hasSymbol = /[()[\]!~=\-?#@$%^&*]/.test(text);
-    console.log(this);
     return hasMaxLength
       && hasMinLength
       && hasNumber
@@ -19,7 +19,6 @@ export default class UserPasswordValidator implements ValidatorConstraintInterfa
   }
 
   defaultMessage() {
-    console.log(this);
     return "Password does not meet minimum requirements";
   }
 }
