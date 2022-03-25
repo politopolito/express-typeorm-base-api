@@ -14,9 +14,6 @@ export default class UserValidator {
   @IsString()
   public lastName: string;
 
-  @IsString()
-  public avatarUrl?: string;
-
   @Validate(UserPasswordValidator)
   @IsOptional()
   public password: string;
