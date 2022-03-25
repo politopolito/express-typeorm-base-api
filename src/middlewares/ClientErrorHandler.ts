@@ -5,6 +5,7 @@ import Log from "../utils/Log";
 import IMiddleware from "../types/IMiddleware";
 import { IRequestErrorHandler } from "../types/IRequestErrorHandler";
 import HttpException from "../exceptions/HttpException";
+import { QueryFailedError } from "typeorm";
 
 /**
  * Handle exceptions thrown from controllers/services.
@@ -15,6 +16,8 @@ class ClientErrorHandler implements IMiddleware {
       Log.error(err.message);
       if (err instanceof HttpException) {
         res.status(err.status).json({ errorMessage: err.message });
+      } else if (err instanceof QueryFailedError) {
+        res.status(400).json( { errorMessage: "Query error!" });
       } else {
         res.status(500).json({ errorMessage: "Something went wrong!" });
       }

@@ -10,6 +10,7 @@ import NotFoundException from "../exceptions/NotFoundException";
  * Handle business logic for User using Data Mapper & Repository pattern.
  */
 export default class UserService implements IService<User>{
+
   /**
    * Get available repository with established connection to a data storage
    * @private

@@ -7,6 +7,8 @@ import PhotoUpdateBodyValidator from "../validators/Photo/PhotoUpdateBodyValidat
 import ParamsValidator from "../middlewares/ParamsValidator";
 import PhotoUpdateParamsValidator from "../validators/Photo/PhotoUpdateParamsValidator";
 import PhotoGetParamsValidator from "../validators/Photo/PhotoGetParamsValidator";
+import QueryValidator from "../middlewares/QueryValidator";
+import PhotoGetQueryValidator from "../validators/Photo/PhotoGetQueryValidator";
 
 /**
  * Router for Photos
@@ -24,9 +26,9 @@ class PhotoRouter implements IRouter {
   }
 
   initializeRoutes() {
-    this.router.get(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoGetParamsValidator), this.photoController.getById);
+    this.router.get(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoGetParamsValidator), QueryValidator(PhotoGetQueryValidator), this.photoController.getById);
     this.router.patch(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), BodyValidator(PhotoUpdateBodyValidator), this.photoController.updateById);
-    this.router.delete(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), BodyValidator(PhotoUpdateBodyValidator), this.photoController.deleteById);
+    this.router.delete(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), this.photoController.deleteById);
     this.router.post(this.path, BodyValidator(PhotoCreateBodyValidator, false), this.photoController.create);
   }
 }

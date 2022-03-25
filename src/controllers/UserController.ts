@@ -1,6 +1,8 @@
 import { IController } from "../types/IController";
 import UserService from "../services/UserService";
 import { IRequestHandler } from "../types/IRequestHandler";
+import User from "../entities/User";
+import { UserDto } from "../mappers/UserMapper";
 
 /**
  * Handle HTTP requests for Users
@@ -13,11 +15,19 @@ class UserController implements IController {
   private readonly userService;
 
   /**
+   * Handles mapping user to dto
+   * @private
+   */
+  private readonly userMapper;
+
+  /**
    * Constructor allows for dependency injection of service
    * @param userService
+   * @param userMapper
    */
-  constructor(userService: UserService = new UserService()) {
+  constructor(userService: UserService = new UserService(), userMapper: IMapper<User, UserDto>) {
     this.userService = userService;
+    this.userMapper = userMapper;
   }
 
   /**
@@ -28,7 +38,7 @@ class UserController implements IController {
    */
   public getById: IRequestHandler = async (req, res) => {
     const user = await this.userService.getById(Number(req.params.id));
-    res.status(200).json({ data: user });
+    res.status(200).json({ data: this.userMapper.toDto(user) });
   };
 
   /**
@@ -39,7 +49,7 @@ class UserController implements IController {
    */
   public create: IRequestHandler = async (req, res) => {
     const user = await this.userService.create(req.body);
-    res.status(201).json({ data: user });
+    res.status(201).json({ data: this.userMapper.toDto(user) });
   };
 
   /**
@@ -51,7 +61,7 @@ class UserController implements IController {
   public updateById: IRequestHandler = async (req, res) => {
     const userUpdatePayload = req.body;
     const user = await this.userService.updateById(Number(req.params.id), userUpdatePayload);
-    res.status(200).json({ data: user });
+    res.status(200).json({ data: this.userMapper.toDto(user) });
   };
 
   /**

@@ -40,9 +40,6 @@ export default class User {
   @Column({ type: "varchar", select: false, nullable: true })
     password: string;
 
-  @Column({ type: "int", nullable: true })
-    legacyId?: number;
-
   @Column({ type: "varchar", nullable: true })
     avatarUrl?: string;
 

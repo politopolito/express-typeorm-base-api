@@ -1,10 +1,11 @@
 /* eslint-disable class-methods-use-this */
 import { IService } from "../types/IService";
-import PhotoRepository from "../repositories/PhotoRepository";
+import PhotoRepository, { PhotoGetQueryOptions } from "../repositories/PhotoRepository";
 import Photo from "../entities/Photo";
 import PhotoCreateBodyValidator from "../validators/Photo/PhotoCreateBodyValidator";
 import PhotoUpdateBodyValidator from "../validators/Photo/PhotoUpdateBodyValidator";
 import NotFoundException from "../exceptions/NotFoundException";
+import { PhotoGetOptions } from "../types/Photo/PhotoGetRequest";
 
 /**
  * Handle business logic for Photo using Data Mapper & Repository pattern.
@@ -28,9 +29,10 @@ export default class PhotoService implements IService<Photo>{
    * Gets photo by id
    * Success: existing photo
    * @param id
+   * @param options
    */
-  public async getById(id: number): Promise<Photo> {
-    const photo = await PhotoService.getRepository().findById(id);
+  public async getById(id: number, options: PhotoGetQueryOptions = {}): Promise<Photo> {
+    const photo = await PhotoService.getRepository().findById(id, options);
     if (!photo) throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
     return photo;
   }

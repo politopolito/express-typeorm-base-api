@@ -1,12 +1,7 @@
-import { IsInt, IsNotEmpty } from "class-validator";
-import { Type } from "class-transformer";
+import BaseParamsValidator from "../BaseParamsValidator";
 
 /**
  * Validate user's update request params
  */
-export default class UserUpdateParamsValidator {
-  @IsInt()
-  @IsNotEmpty()
-  @Type(() => Number)
-  public id: number;
+export default class UserUpdateParamsValidator extends BaseParamsValidator {
 }
