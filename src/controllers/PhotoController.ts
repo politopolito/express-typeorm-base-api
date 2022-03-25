@@ -1,6 +1,9 @@
 import { IController } from "../types/IController";
 import PhotoService from "../services/PhotoService";
 import { IRequestHandler } from "../types/IRequestHandler";
+import Photo from "../entities/Photo";
+import { PhotoDto, PhotoMapper } from "../mappers/PhotoMapper";
+import { PhotoGetRequest } from "../types/Photo/PhotoGetRequest";
 
 /**
  * Handle HTTP requests for Photos
@@ -13,11 +16,22 @@ class PhotoController implements IController {
   private readonly photoService;
 
   /**
+   * Handles mapping photo to dto
+   * @private
+   */
+  private readonly photoMapper;
+
+  /**
    * Constructor allows for dependency injection of service
    * @param photoService
+   * @param photoMapper
    */
-  constructor(photoService: PhotoService = new PhotoService()) {
+  constructor(
+    photoService: PhotoService = new PhotoService(),
+    photoMapper: IMapper<Photo, PhotoDto> = new PhotoMapper(),
+  ) {
     this.photoService = photoService;
+    this.photoMapper = photoMapper;
   }
 
   /**
@@ -26,9 +40,13 @@ class PhotoController implements IController {
    * @param req
    * @param res
    */
-  public getById: IRequestHandler = async (req, res) => {
-    const photo = await this.photoService.getById(Number(req.params.id));
-    res.status(200).json({ data: photo });
+  public getById: IRequestHandler<PhotoGetRequest> = async (req, res) => {
+    const { withUserId } = req.query;
+    const photo = await this.photoService.getById(
+      Number(req.params.id),
+      { withUserId: withUserId === "true" }
+    );
+    res.status(200).json({ data: this.photoMapper.toDto(photo) });
   };
 
   /**
@@ -39,7 +57,7 @@ class PhotoController implements IController {
    */
   public create: IRequestHandler = async (req, res) => {
     const photo = await this.photoService.create(req.body);
-    res.status(201).json({ data: photo });
+    res.status(201).json({ data: this.photoMapper.toDto(photo) });
   };
 
   /**
@@ -51,7 +69,7 @@ class PhotoController implements IController {
   public updateById: IRequestHandler = async (req, res) => {
     const photoUpdatePayload = req.body;
     const photo = await this.photoService.updateById(Number(req.params.id), photoUpdatePayload);
-    res.status(200).json({ data: photo });
+    res.status(200).json({ data: this.photoMapper.toDto(photo) });
   };
 
   /**

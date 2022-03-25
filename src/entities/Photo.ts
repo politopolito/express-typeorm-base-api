@@ -1,9 +1,18 @@
-import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
+import {
+  Column, PrimaryGeneratedColumn, Entity, CreateDateColumn, UpdateDateColumn, ManyToOne,
+} from "typeorm";
+import User from "./User";
 
 @Entity()
 export default class Photo {
   @PrimaryGeneratedColumn()
     id: number;
+
+  @CreateDateColumn()
+    createdAt?: string;
+
+  @UpdateDateColumn()
+    updatedAt?: string;
 
   @Column()
     name: string;
@@ -16,4 +25,7 @@ export default class Photo {
 
   @Column({ default: false })
     isPublic: boolean;
+
+  @ManyToOne(() => User, (user: User) => user.photos)
+    user: User;
 }

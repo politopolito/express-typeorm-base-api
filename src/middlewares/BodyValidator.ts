@@ -10,7 +10,7 @@ import { IRequestHandler } from "../types/IRequestHandler";
  */
 const BodyValidator = (
   type: any, // eslint-disable-line @typescript-eslint/no-explicit-any
-  skipMissingProperties = true,
+  skipMissingProperties = false,
 ): IRequestHandler => (
   req,
   res,

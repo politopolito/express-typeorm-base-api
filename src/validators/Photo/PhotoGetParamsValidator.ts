@@ -1,13 +1,7 @@
-import { IsInt, IsNotEmpty } from "class-validator";
-import { Type } from "class-transformer";
-import PhotoValidator from "./PhotoValidator";
+import BaseParamsValidator from "../BaseParamsValidator";
 
 /**
  * Validate photo's get request params
  */
-export default class PhotoGetParamsValidator extends PhotoValidator {
-  @IsInt()
-  @IsNotEmpty()
-  @Type(() => Number)
-  declare public id: number;
+export default class PhotoGetParamsValidator extends BaseParamsValidator {
 }
