@@ -6,10 +6,10 @@ export default class UserPasswordValidator implements ValidatorConstraintInterfa
     const hasMinLength = text.length >= 8;
     const hasMaxLength = text.length <= 32;
     const hasNumber = /[0-9]/.test(text);
+    const hasLowerCase = /[a-z]/.test(text);
     const hasUppercase = /[A-Z]/.test(text);
-    const hasLowerCase = /[a-z]]/.test(text);
     const hasSymbol = /[()[\]!~=\-?#@$%^&*]/.test(text);
-
+    console.log(this);
     return hasMaxLength
       && hasMinLength
       && hasNumber
@@ -19,6 +19,7 @@ export default class UserPasswordValidator implements ValidatorConstraintInterfa
   }
 
   defaultMessage() {
+    console.log(this);
     return "Password does not meet minimum requirements";
   }
 }
