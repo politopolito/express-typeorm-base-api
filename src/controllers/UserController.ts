@@ -2,7 +2,8 @@ import { IController } from "../types/IController";
 import UserService from "../services/UserService";
 import { IRequestHandler } from "../types/IRequestHandler";
 import User from "../entities/User";
-import { UserDto } from "../mappers/UserMapper";
+import { UserDto, UserMapper } from "../mappers/UserMapper";
+import { IMapper } from "../mappers/IMapper";
 
 /**
  * Handle HTTP requests for Users
@@ -25,7 +26,7 @@ class UserController implements IController {
    * @param userService
    * @param userMapper
    */
-  constructor(userService: UserService = new UserService(), userMapper: IMapper<User, UserDto>) {
+  constructor(userService: UserService = new UserService(), userMapper: IMapper<User, UserDto> = new UserMapper()) {
     this.userService = userService;
     this.userMapper = userMapper;
   }

@@ -4,6 +4,7 @@ import { IRequestHandler } from "../types/IRequestHandler";
 import Photo from "../entities/Photo";
 import { PhotoDto, PhotoMapper } from "../mappers/PhotoMapper";
 import { PhotoGetRequest } from "../types/Photo/PhotoGetRequest";
+import { IMapper } from "../mappers/IMapper";
 
 /**
  * Handle HTTP requests for Photos
@@ -44,7 +45,7 @@ class PhotoController implements IController {
     const { withUserId } = req.query;
     const photo = await this.photoService.getById(
       Number(req.params.id),
-      { withUserId: withUserId === "true" }
+      { withUserId: withUserId === "true" },
     );
     res.status(200).json({ data: this.photoMapper.toDto(photo) });
   };

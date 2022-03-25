@@ -1,5 +1,6 @@
 import User, { UserRole } from "../entities/User";
 import Photo from "../entities/Photo";
+import { IMapper } from "./IMapper";
 
 export interface UserDto {
   id: number;
@@ -24,6 +25,6 @@ export class UserMapper implements IMapper<User, UserDto> {
       avatarUrl: u.avatarUrl,
       role: u.role,
       photos: u.photos?.length > 0 ? u.photos : null,
-    }
+    };
   }
 }

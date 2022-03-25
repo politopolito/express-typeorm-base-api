@@ -12,7 +12,7 @@ import UserGetParamsValidator from "../validators/User/UserGetParamsValidator";
  * Router for Users
  */
 class UserRouter implements IRouter {
-  public path = "/Users";
+  public path = "/users";
 
   public router: Router;
 

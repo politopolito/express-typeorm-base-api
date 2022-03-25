@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IService<T> {
   getById(id: number, options: any): Promise<T>;
   create(data: any): Promise<T>;
