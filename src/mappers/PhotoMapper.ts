@@ -1,4 +1,5 @@
 import Photo from "../entities/Photo";
+import { IMapper } from "./IMapper";
 
 export interface PhotoDto {
   id: number;
@@ -21,6 +22,6 @@ export class PhotoMapper implements IMapper<Photo, PhotoDto>{
       filename: p.filename,
       isPublic: p.isPublic,
       userId: p.user?.id,
-    }
+    };
   }
 }

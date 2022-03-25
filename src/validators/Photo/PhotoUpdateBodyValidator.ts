@@ -12,5 +12,5 @@ export default class PhotoUpdateBodyValidator extends PhotoValidator {
     userId: number;
 
   @IsEmpty()
-    declare filename: string;
+  declare filename: string;
 }

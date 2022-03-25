@@ -5,7 +5,6 @@ import Photo from "../entities/Photo";
 import PhotoCreateBodyValidator from "../validators/Photo/PhotoCreateBodyValidator";
 import PhotoUpdateBodyValidator from "../validators/Photo/PhotoUpdateBodyValidator";
 import NotFoundException from "../exceptions/NotFoundException";
-import { PhotoGetOptions } from "../types/Photo/PhotoGetRequest";
 
 /**
  * Handle business logic for Photo using Data Mapper & Repository pattern.

@@ -35,6 +35,7 @@ module.exports = {
 	},
 	rules: {
 		"no-console": "off", // FOR TESTING ONLY
+		"class-methods-use-this": "off",
 		"no-param-reassign": "off",
 		curly: "error",
 		"@typescript-eslint/quotes": [ "error", "double", { "avoidEscape": true, "allowTemplateLiterals": true } ],
