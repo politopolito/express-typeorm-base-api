@@ -42,6 +42,28 @@ class UserController implements IController {
     res.status(201).json({ data: user });
   };
 
+  /**
+   * Updates user by id
+   * Success: 200 & updated entity json.
+   * @param req
+   * @param res
+   */
+  public updateById: IRequestHandler = async (req, res) => {
+    const userUpdatePayload = req.body;
+    const user = await this.userService.updateById(Number(req.params.id), userUpdatePayload);
+    res.status(200).json({ data: user });
+  };
+  
+  /**
+     * Deletes user by id
+     * Success: 204.
+     * @param req
+     * @param res
+     */
+  public deleteById: IRequestHandler = async (req, res) => {
+    await this.userService.deleteById(Number(req.params.id));
+    res.sendStatus(204);
+  };
 }
 
 export default UserController;
