@@ -64,7 +64,7 @@ class Express {
 
     this.express.listen(port, () => {
       // eslint-disable-next-line no-console
-      Log.info(`⚡️[server]: Server is running at https://localhost:${port}`);
+      Log.info(`⚡️[server]: Server is running at localhost:${port}`);
     }).on("error", (_error) => {
       Log.error(_error.message);
     });

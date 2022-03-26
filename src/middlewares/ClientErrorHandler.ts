@@ -1,11 +1,11 @@
 import {
   Application, NextFunction, Request, Response,
 } from "express";
+import { QueryFailedError } from "typeorm";
 import Log from "../utils/Log";
 import IMiddleware from "../types/IMiddleware";
 import { IRequestErrorHandler } from "../types/IRequestErrorHandler";
 import HttpException from "../exceptions/HttpException";
-import { QueryFailedError } from "typeorm";
 
 /**
  * Handle exceptions thrown from controllers/services.

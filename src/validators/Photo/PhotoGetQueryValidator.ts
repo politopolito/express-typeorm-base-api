@@ -5,6 +5,6 @@ import { IsIn, IsOptional } from "class-validator";
  */
 export default class PhotoGetQueryValidator {
   @IsOptional()
-  @IsIn(["true", "false"])
-  withUserId: string;
+  @IsIn([ "true", "false" ])
+    withUserId: string;
 }
