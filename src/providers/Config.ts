@@ -8,7 +8,6 @@ type AppConfig = {
   appName: string;
   appDescription: string;
   port: number;
-  appSecret: string;
   isCORSEnabled: boolean;
   appURL: string;
   apiPrefix: string;
@@ -20,7 +19,6 @@ type AppConfig = {
   databaseSynchronize: boolean;
   databaseLogging: boolean;
   auth0Identifier: string;
-  auth0Secret: string;
   auth0Issuer: string;
   auth0jwksUri: string;
 };
@@ -36,12 +34,11 @@ class Config implements IMiddleware {
    */
   public static config(): AppConfig {
     if (!Config.appConfig) {
-      console.log(process.env.APP_NAME);
+      dotenv.config({ path: path.join(__dirname, "../../.env") });
       Config.appConfig = {
         appName: process.env.APP_NAME || "My App",
         appDescription: process.env.APP_DESCRIPTION || "Welcome to my app",
         port: !Number.isNaN(Number(process.env.PORT)) ? Number(process.env.PORT) : 4000,
-        appSecret: process.env.APP_SECRET,
         isCORSEnabled: Boolean(process.env.CORS_ENABLED),
         appURL: process.env.APP_URL || "localhost",
         apiPrefix: process.env.API_PREFIX || "",
@@ -53,7 +50,6 @@ class Config implements IMiddleware {
         databaseLogging: process.env.DATABASE_LOGGING?.toLowerCase() === "true",
         databaseSynchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
         auth0Identifier: process.env.AUTH0_IDENTIFIER,
-        auth0Secret: process.env.AUTH0_SECRET,
         auth0Issuer: process.env.AUTH0_ISSUER,
         auth0jwksUri: process.env.AUTH0_JWKS_URI,
       };
@@ -68,7 +64,6 @@ class Config implements IMiddleware {
    */
   public static init(_express: Application) {
     Log.info("Config :: Mounting config middleware");
-    dotenv.config({ path: path.join(__dirname, "../../.env") });
     _express.locals.app = this.config();
   }
 }
