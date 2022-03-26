@@ -43,5 +43,6 @@ module.exports = {
 		"object-curly-newline": "error",
 		"object-curly-spacing": [ "error", "always", { "arraysInObjects": true } ],
 		"import/no-cycle": "off",
+		"@typescript-eslint/no-use-before-define": "off"
 	}
 };
