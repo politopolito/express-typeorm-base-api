@@ -30,10 +30,13 @@ export default class User {
   @IsEmail()
     email: string;
 
-  @Column({ type: "varchar" })
+  @Column({ default: false })
+  isEmailVerified: boolean;
+
+  @Column({ type: "varchar", nullable: true })
     firstName: string;
 
-  @Column({ type: "varchar" })
+  @Column({ type: "varchar", nullable: true })
     lastName: string;
 
   @Validate(UserPasswordValidator)

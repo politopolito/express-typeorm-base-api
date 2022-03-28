@@ -21,9 +21,10 @@ export default class UserService implements IService<User>{
 
   /**
    * Error message for NotFoundException
-   * @param id
+   * @param key
+   * @param val
    */
-  private static notFoundErrorMessage = (id: number) => `User id:${id} not found`;
+  private static notFoundErrorMessage = (key: string, val: string | number) => `User ${key}:${val} not found`;
 
   /**
    * Gets user by id
@@ -32,7 +33,18 @@ export default class UserService implements IService<User>{
    */
   public async getById(id: number): Promise<User> {
     const user = await UserService.getRepository().findById(id);
-    if (!user) throw new NotFoundException(UserService.notFoundErrorMessage(id));
+    if (!user) throw new NotFoundException(UserService.notFoundErrorMessage("id", id));
+    return user;
+  }
+
+  /**
+   * Gets user by auth0 id
+   * Success: existing user
+   * @param email
+   */
+  public async getByEmail(email: string): Promise<User> {
+    const user = await UserService.getRepository().findByEmail(email);
+    if (!user) throw new NotFoundException(UserService.notFoundErrorMessage("email", email));
     return user;
   }
 
@@ -55,7 +67,7 @@ export default class UserService implements IService<User>{
     const repo = UserService.getRepository();
     const user = await this.getById(id);
 
-    if (!user) throw new NotFoundException(UserService.notFoundErrorMessage(id));
+    if (!user) throw new NotFoundException(UserService.notFoundErrorMessage("id", id));
 
     repo.merge(user, userUpdateDate);
     return UserService.getRepository().save(user);
@@ -69,7 +81,7 @@ export default class UserService implements IService<User>{
   public async deleteById(id: number): Promise<void> {
     const deleteData = await UserService.getRepository().delete({ id });
     if (deleteData.affected === 0) {
-      throw new NotFoundException(UserService.notFoundErrorMessage(id));
+      throw new NotFoundException(UserService.notFoundErrorMessage("id", id));
     }
   }
 }

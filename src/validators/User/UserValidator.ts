@@ -1,5 +1,5 @@
 import {
-  IsEmail, IsEnum, IsOptional, IsString, Validate, 
+  IsEmail, IsEnum, IsOptional, IsString, Validate,
 } from "class-validator";
 import UserPasswordValidator from "./UserPasswordValidator";
 import { UserRole } from "../../entities/User";
@@ -12,10 +12,12 @@ export default class UserValidator {
   public email: string;
 
   @IsString()
-  public firstName: string;
+  @IsOptional()
+  public firstName?: string;
 
   @IsString()
-  public lastName: string;
+  @IsOptional()
+  public lastName?: string;
 
   @IsString()
   @IsOptional()
@@ -23,7 +25,7 @@ export default class UserValidator {
 
   @Validate(UserPasswordValidator)
   @IsOptional()
-  public password: string;
+  public password?: string;
 
   @IsEnum(UserRole)
   public role: UserRole;

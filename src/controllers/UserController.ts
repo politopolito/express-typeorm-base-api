@@ -13,13 +13,13 @@ class UserController implements IController {
    * Handles all business logic related to User entity
    * @private
    */
-  private readonly userService;
+  protected readonly userService;
 
   /**
    * Handles mapping user to dto
    * @private
    */
-  private readonly userMapper;
+  protected readonly userMapper;
 
   /**
    * Constructor allows for dependency injection of service
