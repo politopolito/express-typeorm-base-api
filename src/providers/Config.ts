@@ -18,7 +18,8 @@ type AppConfig = {
   databaseName: string;
   databaseSynchronize: boolean;
   databaseLogging: boolean;
-  auth0Identifier: string;
+  auth0ServerAudience: string;
+  auth0ClientAudience: string;
   auth0Issuer: string;
   auth0jwksUri: string;
 };
@@ -49,7 +50,8 @@ class Config implements IMiddleware {
         databaseName: process.env.DATABASE_NAME || "mydb",
         databaseLogging: process.env.DATABASE_LOGGING?.toLowerCase() === "true",
         databaseSynchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
-        auth0Identifier: process.env.AUTH0_IDENTIFIER,
+        auth0ServerAudience: process.env.AUTH0_SERVER_AUDIENCE,
+        auth0ClientAudience: process.env.AUTH0_CLIENT_AUDIENCE,
         auth0Issuer: process.env.AUTH0_ISSUER,
         auth0jwksUri: process.env.AUTH0_JWKS_URI,
       };

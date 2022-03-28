@@ -1,7 +1,6 @@
 import { Router } from "express";
 import HomeController from "../controllers/HomeController";
 import IRouter from "../types/IRouter";
-import JWTCheck from "../middlewares/JWTCheck";
 
 /**
  * Routes for root/home path
@@ -18,7 +17,6 @@ class HomeRouter implements IRouter {
 
   initializeRoutes() {
     this.router.get(this.path, HomeController.index);
-    this.router.get(`${this.path}api/external`, JWTCheck.use(), HomeController.index);
   }
 }
 
