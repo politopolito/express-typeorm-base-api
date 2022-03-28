@@ -13,6 +13,7 @@ import HttpException from "../exceptions/HttpException";
 class ClientErrorHandler implements IMiddleware {
   private static handler: IRequestErrorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err) {
+      console.error(err);
       Log.error(err.message);
       if (err instanceof HttpException) {
         res.status(err.status).json({ errorMessage: err.message });

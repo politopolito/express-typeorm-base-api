@@ -1,13 +1,11 @@
-import { Response } from "express";
+import { Response, Request } from "express";
 import Config from "../providers/Config";
-import { RequestWithUser } from "../types/User/RequestWithUser";
 
 /**
  * Handle HTTP requests for Home/Route path
  */
 class HomeController {
-  public static index(_req: RequestWithUser, res: Response) {
-    console.log(_req.user);
+  public static index(_req: Request, res: Response) {
     return res.json({
       name: Config.config().appName,
       description: Config.config().appDescription,

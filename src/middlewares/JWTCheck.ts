@@ -5,36 +5,47 @@ import IMiddleware from "../types/IMiddleware";
 import Config from "../providers/Config";
 
 /**
- * General Authentication for API
- * It will populate req.user
+ * Authentication middleware JWT-based
+ * Default behavior:
+ * Extract access_token from the "Authorization" header
+ * as an OAuth2 Bearer Token
+ * and populate req.auth
  */
-class JWTCheck implements IMiddleware {
-  private static handler: jwt.RequestHandler;
+export class JWTCheck implements IMiddleware {
+  protected static initMessage = "JWTCheck :: Mounting OAuth2 Bearer Token validator...";
 
-  public static use(){
-    Log.info("JWTCheck :: Checking JWT...");
+  private handler: jwt.RequestHandler;
 
-    if (this.handler) return this.handler;
+  constructor(msg?: string) {
+    Log.info(msg ?? JWTCheck.initMessage);
+  }
 
+  public getOptions(): jwt.Options {
     const {
-      auth0Identifier,
+      auth0ServerAudience,
       auth0jwksUri,
       auth0Issuer,
     } = Config.config();
 
-    this.handler = jwt({
+    return {
       secret: jwksRsa.expressJwtSecret({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
         jwksUri: auth0jwksUri,
       }),
-      audience: auth0Identifier,
+      audience: auth0ServerAudience,
       issuer: auth0Issuer,
       algorithms: [ "RS256" ],
-    });
+      requestProperty: "auth",
+    };
+  }
+
+  public use() {
+    if (this.handler) return this.handler;
+    this.handler = jwt(this.getOptions());
     return this.handler;
   }
 }
 
-export default JWTCheck;
+export default new JWTCheck();
