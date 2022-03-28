@@ -4,8 +4,9 @@
 
 1. Install dependencies: `yarn install`.
 2. Configure prettier ([see docs](https://prettier.io/docs/en/editors.html))
-3. Download `.env` file from drive's folder and place in project root.
+3. Download `.env` file from drive's folder and place in project root (see [.env.base](.env.base) as an example).
 4. Run with `yarn dev`.
+5. (Optional) You can run [React Auth0 Example](https://github.com/herrera-ignacio/react-auth0-example) app if you want to test authentication. You'll have to setup your auth0 secrets properly.
 
 ## Project Structure
 
