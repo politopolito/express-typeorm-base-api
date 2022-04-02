@@ -9,10 +9,10 @@ export default class Photo {
     id: number;
 
   @CreateDateColumn()
-    createdAt?: string;
+    createdAt: string;
 
   @UpdateDateColumn()
-    updatedAt?: string;
+    updatedAt: string;
 
   @Column()
     name: string;

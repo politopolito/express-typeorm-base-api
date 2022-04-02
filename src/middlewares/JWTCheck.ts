@@ -11,13 +11,13 @@ import Config from "../providers/Config";
  * as an OAuth2 Bearer Token
  * and populate req.auth
  */
-export class JWTCheck implements IMiddleware {
+export class JWTCheckMiddleware implements IMiddleware {
   protected static initMessage = "JWTCheck :: Mounting OAuth2 Bearer Token validator...";
 
   private handler: jwt.RequestHandler;
 
   constructor(msg?: string) {
-    Log.info(msg ?? JWTCheck.initMessage);
+    Log.info(msg ?? JWTCheckMiddleware.initMessage);
   }
 
   public getOptions(): jwt.Options {
@@ -48,4 +48,4 @@ export class JWTCheck implements IMiddleware {
   }
 }
 
-export default new JWTCheck();
+export default new JWTCheckMiddleware();

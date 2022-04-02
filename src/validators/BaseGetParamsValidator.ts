@@ -2,9 +2,9 @@ import { IsInt, IsNotEmpty } from "class-validator";
 import { Type } from "class-transformer";
 
 /**
- * Validate user's update request params
+ * Validate base get params
  */
-export default class BaseParamsValidator {
+export default class BaseGetParamsValidator {
   @IsInt()
   @IsNotEmpty()
   @Type(() => Number)

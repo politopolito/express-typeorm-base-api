@@ -31,17 +31,17 @@ export default class User {
     email: string;
 
   @Column({ default: false })
-  isEmailVerified: boolean;
+    isEmailVerified: boolean;
 
   @Column({ type: "varchar", nullable: true })
-    firstName: string;
+    firstName?: string;
 
   @Column({ type: "varchar", nullable: true })
-    lastName: string;
+    lastName?: string;
 
   @Validate(UserPasswordValidator)
   @Column({ type: "varchar", select: false, nullable: true })
-    password: string;
+    password?: string;
 
   @Column({ type: "varchar", nullable: true })
     avatarUrl?: string;

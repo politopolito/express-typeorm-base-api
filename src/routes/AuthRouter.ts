@@ -9,6 +9,7 @@ import OIDCheck from "../middlewares/OIDCheck";
  */
 class AuthRouter implements IRouter {
   public path = "/auth";
+
   public router: Router;
 
   private authController = new AuthController();

@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+import { Repository } from "typeorm";
 import { IService } from "../types/IService";
 import UserRepository from "../repositories/UserRepository";
 import User from "../entities/User";
@@ -10,12 +11,11 @@ import NotFoundException from "../exceptions/NotFoundException";
  * Handle business logic for User using Data Mapper & Repository pattern.
  */
 export default class UserService implements IService<User>{
-
   /**
    * Get available repository with established connection to a data storage
    * @private
    */
-  private static getRepository(): ReturnType<typeof UserRepository> {
+  public getRepository(): Repository<User> {
     return UserRepository();
   }
 
@@ -32,7 +32,7 @@ export default class UserService implements IService<User>{
    * @param id
    */
   public async getById(id: number): Promise<User> {
-    const user = await UserService.getRepository().findById(id);
+    const user = await this.getRepository().findOneBy({ id });
     if (!user) throw new NotFoundException(UserService.notFoundErrorMessage("id", id));
     return user;
   }
@@ -43,7 +43,7 @@ export default class UserService implements IService<User>{
    * @param email
    */
   public async getByEmail(email: string): Promise<User> {
-    const user = await UserService.getRepository().findByEmail(email);
+    const user = await this.getRepository().findOneBy({ email });
     if (!user) throw new NotFoundException(UserService.notFoundErrorMessage("email", email));
     return user;
   }
@@ -54,23 +54,19 @@ export default class UserService implements IService<User>{
    * @param userData
    */
   public async create(userData: UserCreateBodyValidator): Promise<User> {
-    return UserService.getRepository().save({ ...userData });
+    return this.getRepository().save({ ...userData });
   }
 
   /**
    * Updates user by id
    * Success: updated user
    * @param id
-   * @param userUpdateDate
+   * @param userUpdateData
    */
-  public async updateById(id: number, userUpdateDate: UserUpdateBodyValidator): Promise<User> {
-    const repo = UserService.getRepository();
+  public async updateById(id: number, userUpdateData: UserUpdateBodyValidator): Promise<User> {
     const user = await this.getById(id);
-
-    if (!user) throw new NotFoundException(UserService.notFoundErrorMessage("id", id));
-
-    repo.merge(user, userUpdateDate);
-    return UserService.getRepository().save(user);
+    const repo = this.getRepository();
+    return repo.save({ ...user, ...userUpdateData });
   }
 
   /**
@@ -79,7 +75,7 @@ export default class UserService implements IService<User>{
    * @param id
    */
   public async deleteById(id: number): Promise<void> {
-    const deleteData = await UserService.getRepository().delete({ id });
+    const deleteData = await this.getRepository().delete({ id });
     if (deleteData.affected === 0) {
       throw new NotFoundException(UserService.notFoundErrorMessage("id", id));
     }

@@ -1,6 +1,6 @@
 import { Request } from "express";
 import jwt from "express-jwt";
-import { JWTCheck } from "./JWTCheck";
+import { JWTCheckMiddleware } from "./JWTCheck";
 import Config from "../providers/Config";
 
 /**
@@ -8,15 +8,15 @@ import Config from "../providers/Config";
  * Extract JWT from the X-OIDC header as an JWT
  * It will populate req.user
  */
-class OIDCheck extends JWTCheck {
+class OIDCheckMiddleware extends JWTCheckMiddleware {
   protected static initMessage = "OIDCheck :: Mounting X-OIDC JWT validator...";
 
   constructor() {
-    super(OIDCheck.initMessage);
+    super(OIDCheckMiddleware.initMessage);
   }
 
   public getOptions(): jwt.Options {
-    const baseOptions = JWTCheck.prototype.getOptions.call(this);
+    const baseOptions = JWTCheckMiddleware.prototype.getOptions.call(this);
     const { auth0ClientAudience } = Config.config();
     return {
       ...baseOptions,
@@ -29,4 +29,4 @@ class OIDCheck extends JWTCheck {
   }
 }
 
-export default new OIDCheck();
+export default new OIDCheckMiddleware();
