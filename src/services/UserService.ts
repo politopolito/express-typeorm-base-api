@@ -1,11 +1,11 @@
 /* eslint-disable class-methods-use-this */
+import { Repository } from "typeorm";
 import { IService } from "../types/IService";
 import UserRepository from "../repositories/UserRepository";
 import User from "../entities/User";
 import UserCreateBodyValidator from "../validators/User/UserCreateBodyValidator";
 import UserUpdateBodyValidator from "../validators/User/UserUpdateBodyValidator";
 import NotFoundException from "../exceptions/NotFoundException";
-import { Repository } from "typeorm";
 
 /**
  * Handle business logic for User using Data Mapper & Repository pattern.
@@ -61,16 +61,12 @@ export default class UserService implements IService<User>{
    * Updates user by id
    * Success: updated user
    * @param id
-   * @param userUpdateDate
+   * @param userUpdateData
    */
-  public async updateById(id: number, userUpdateDate: UserUpdateBodyValidator): Promise<User> {
-    const repo = this.getRepository();
+  public async updateById(id: number, userUpdateData: UserUpdateBodyValidator): Promise<User> {
     const user = await this.getById(id);
-
-    if (!user) throw new NotFoundException(UserService.notFoundErrorMessage("id", id));
-
-    repo.merge(user, userUpdateDate);
-    return repo.save(user);
+    const repo = this.getRepository();
+    return repo.save({ ...user, ...userUpdateData });
   }
 
   /**

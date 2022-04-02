@@ -34,14 +34,14 @@ export default class User {
     isEmailVerified: boolean;
 
   @Column({ type: "varchar", nullable: true })
-    firstName: string;
+    firstName?: string;
 
   @Column({ type: "varchar", nullable: true })
-    lastName: string;
+    lastName?: string;
 
   @Validate(UserPasswordValidator)
   @Column({ type: "varchar", select: false, nullable: true })
-    password: string;
+    password?: string;
 
   @Column({ type: "varchar", nullable: true })
     avatarUrl?: string;
