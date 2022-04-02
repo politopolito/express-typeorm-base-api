@@ -25,5 +25,5 @@ export default class PhotoUpdateBodyValidator {
 
   @IsBoolean()
   @IsOptional()
-    isPublic: boolean;
+    isPublic?: boolean;
 }
