@@ -31,7 +31,7 @@ export default class User {
     email: string;
 
   @Column({ default: false })
-  isEmailVerified: boolean;
+    isEmailVerified: boolean;
 
   @Column({ type: "varchar", nullable: true })
     firstName: string;

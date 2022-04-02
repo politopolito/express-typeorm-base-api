@@ -1,5 +1,6 @@
 import { NextFunction, Response } from "express";
-import { RequestWithAuth, RequestWithOIDC } from "../types/Auth/RequestWithUser";
+import { RequestWithAuth } from "../types/Auth/RequestWithAuth";
+import { RequestWithOIDC } from "../types/User/RequestWithUser";
 import UserService from "../services/UserService";
 import { UserMapper } from "../mappers/UserMapper";
 import UserController from "./UserController";
@@ -37,7 +38,7 @@ class AuthController extends UserController {
     }
 
     res.status(200).json({ data: this.userMapper.toDto(user) });
-  }
+  };
 }
 
 export default AuthController;
