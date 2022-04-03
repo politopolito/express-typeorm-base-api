@@ -1,5 +1,5 @@
 import {
-  Router, 
+  Router,
 } from "express";
 import HomeRouter from "./HomeRouter";
 import PhotoRouter from "./PhotoRouter";

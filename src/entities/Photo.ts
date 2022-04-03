@@ -4,7 +4,7 @@ import {
   Entity,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne, 
+  ManyToOne,
 } from "typeorm";
 import User from "./User";
 import IEntityWithFactoryMethod from "../types/IEntityWithFactoryMethod";
@@ -32,6 +32,8 @@ export default class Photo extends IEntityWithFactoryMethod {
   @Column({ default: false })
     isPublic: boolean;
 
-  @ManyToOne(() => User, (user: User) => user.photos)
+  @ManyToOne(
+    () => User, (user: User) => user.photos,
+  )
     user: User;
 }

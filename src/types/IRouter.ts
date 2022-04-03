@@ -1,5 +1,5 @@
 import {
-  Router, 
+  Router,
 } from "express";
 
 export default interface IRouter {

@@ -46,28 +46,28 @@ export default class User extends IEntityWithFactoryMethod {
     isEmailVerified: boolean;
 
   @Column({
-    type    : "varchar",
     nullable: true,
+    type    : "varchar",
   })
     firstName?: string;
 
   @Column({
-    type    : "varchar",
     nullable: true,
+    type    : "varchar",
   })
     lastName?: string;
 
   @Validate(UserPasswordValidator)
   @Column({
-    type    : "varchar",
-    select  : false,
     nullable: true,
+    select  : false,
+    type    : "varchar",
   })
     password?: string;
 
   @Column({
-    type    : "varchar",
     nullable: true,
+    type    : "varchar",
   })
     avatarUrl?: string;
 

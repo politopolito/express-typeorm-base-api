@@ -1,9 +1,9 @@
 import {
   IsInt,
-  IsNotEmpty, 
+  IsNotEmpty,
 } from "class-validator";
 import {
-  Type, 
+  Type,
 } from "class-transformer";
 
 /**

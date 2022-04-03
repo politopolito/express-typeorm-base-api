@@ -1,5 +1,5 @@
 import {
-  IRequestHandler, 
+  IRequestHandler,
 } from "./IRequestHandler";
 
 export interface IController {

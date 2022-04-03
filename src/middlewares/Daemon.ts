@@ -1,6 +1,6 @@
 import {
   Application,
-  json, 
+  json,
 } from "express";
 import Config from "../providers/Config";
 import CORS from "./CORS";

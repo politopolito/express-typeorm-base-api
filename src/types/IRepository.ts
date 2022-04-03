@@ -1,5 +1,5 @@
 import {
-  Repository, 
+  Repository,
 } from "typeorm";
 
 type IRepository<T> = Repository<T> & {

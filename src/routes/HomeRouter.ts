@@ -1,5 +1,5 @@
 import {
-  Router, 
+  Router,
 } from "express";
 import HomeController from "../controllers/HomeController";
 import IRouter from "../types/IRouter";
@@ -18,7 +18,9 @@ class HomeRouter implements IRouter {
   }
 
   initializeRoutes() {
-    this.router.get(this.path, HomeController.index);
+    this.router.get(
+      this.path, HomeController.index,
+    );
   }
 }
 

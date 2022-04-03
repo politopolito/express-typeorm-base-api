@@ -2,7 +2,7 @@ import {
   Application,
   Request,
   Response,
-  NextFunction, 
+  NextFunction,
 } from "express";
 
 abstract class IMiddleware {

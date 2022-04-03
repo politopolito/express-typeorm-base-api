@@ -1,21 +1,13 @@
 import {
   NextFunction,
-  Response, 
+  Response,
 } from "express";
-import {
-  RequestWithAuth, 
-} from "../types/Auth/RequestWithAuth";
-import {
-  RequestWithOIDC, 
-} from "../types/User/RequestWithUser";
+import { RequestWithAuth } from "../types/Auth/RequestWithAuth";
+import { RequestWithOIDC } from "../types/User/RequestWithUser";
 import UserService from "../services/UserService";
-import {
-  UserMapper, 
-} from "../mappers/UserMapper";
+import { UserMapper } from "../mappers/UserMapper";
 import UserController from "./UserController";
-import User, {
-  UserRole, 
-} from "../entities/User";
+import User, { UserRole } from "../entities/User";
 import NotFoundException from "../exceptions/NotFoundException";
 
 /**
@@ -27,9 +19,13 @@ class AuthController extends UserController {
    * @param userService
    * @param userMapper
    */
-  constructor(userService: UserService = new UserService(),
-    userMapper: UserMapper = new UserMapper()) {
-    super(userService, userMapper);
+  constructor(
+    userService: UserService = new UserService(),
+    userMapper: UserMapper = new UserMapper(),
+  ) {
+    super(
+      userService, userMapper,
+    );
   }
 
   public onSuccess = async (
@@ -42,12 +38,13 @@ class AuthController extends UserController {
     } catch (e) {
       if (e instanceof NotFoundException) {
         const {
-          email, picture, 
+          email, picture,
         } = req.user;
+
         user = await this.userService.create({
-          email,
           avatarImg: picture,
-          role     : UserRole.CONTRACTOR, 
+          email,
+          role     : UserRole.CONTRACTOR,
         });
       } else {
         next(e);

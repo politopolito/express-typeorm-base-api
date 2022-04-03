@@ -1,7 +1,12 @@
 import {
   NextFunction,
   Request,
-  Response, 
+  Response,
 } from "express";
 
-export type IRequestErrorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => void;
+export type IRequestErrorHandler = (
+  err: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => void;

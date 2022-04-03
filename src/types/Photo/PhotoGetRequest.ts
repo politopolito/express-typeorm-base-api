@@ -1,5 +1,5 @@
 import {
-  Request, 
+  Request,
 } from "express";
 import * as core from "express-serve-static-core";
 

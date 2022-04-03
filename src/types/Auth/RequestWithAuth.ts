@@ -1,5 +1,5 @@
 import {
-  Request, 
+  Request,
 } from "express";
 
 export interface RequestWithAuth extends Request {

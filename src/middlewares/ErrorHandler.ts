@@ -1,5 +1,5 @@
 import {
-  Application, 
+  Application,
 } from "express";
 import IMiddleware from "../types/IMiddleware";
 import NotFoundHandler from "./NotFoundHandler";

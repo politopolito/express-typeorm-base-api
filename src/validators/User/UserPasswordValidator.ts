@@ -1,12 +1,12 @@
 /* eslint-disable class-methods-use-this */
 import {
   ValidatorConstraint,
-  ValidatorConstraintInterface, 
+  ValidatorConstraintInterface,
 } from "class-validator";
 
 @ValidatorConstraint({
+  async: false,
   name : "userPassword",
-  async: false, 
 })
 export default class UserPasswordValidator implements ValidatorConstraintInterface {
   validate(text: string): boolean {

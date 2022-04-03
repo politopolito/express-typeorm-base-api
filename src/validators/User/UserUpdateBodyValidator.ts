@@ -3,17 +3,18 @@ import {
   IsEnum,
   IsOptional,
   IsString,
-  Validate, 
+  Validate,
 } from "class-validator";
 import UserPasswordValidator from "./UserPasswordValidator";
-import {
-  UserRole, 
-} from "../../entities/User";
+import { UserRole } from "../../entities/User";
+import { UserUpdateBody } from "../../types/User/UserUpdateRequest";
 
 /**
  * Validate user's update request body
  */
-export default class UserUpdateBodyValidator {
+export default class UserUpdateBodyValidator implements UserUpdateBody {
+  [x: string]: string;
+
   @IsEmail()
   @IsOptional()
   public email?: string;
@@ -28,7 +29,7 @@ export default class UserUpdateBodyValidator {
 
   @IsString()
   @IsOptional()
-  public avatarImg?: string;
+  public avatarUrl?: string;
 
   @Validate(UserPasswordValidator)
   @IsOptional()

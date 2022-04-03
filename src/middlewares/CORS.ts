@@ -1,6 +1,4 @@
-import {
-  Application, 
-} from "express";
+import { Application } from "express";
 import cors from "cors";
 import Log from "../utils/Log";
 import Config from "../providers/Config";
@@ -14,8 +12,8 @@ class CORS implements IMiddleware {
     Log.info("Middlewares :: Mounting 'CORS'...");
 
     _express.use(cors({
-      origin        : Config.config().appURL,
       allowedHeaders: [ "Authorization", "Content-Type" ],
+      origin        : Config.config().appURL,
     }));
   }
 }

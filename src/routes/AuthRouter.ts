@@ -1,5 +1,5 @@
 import {
-  Router, 
+  Router,
 } from "express";
 import AuthController from "../controllers/AuthController";
 import IRouter from "../types/IRouter";

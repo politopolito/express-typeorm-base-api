@@ -1,6 +1,6 @@
 import {
   IsIn,
-  IsOptional, 
+  IsOptional,
 } from "class-validator";
 
 /**

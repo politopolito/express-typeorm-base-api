@@ -1,10 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import {
-  IService, 
-} from "../types/IService";
-import PhotoRepository, {
-  PhotoGetQueryOptions, 
-} from "../repositories/PhotoRepository";
+import { IService } from "../types/IService";
+import photoRepository, { PhotoGetQueryOptions } from "../repositories/PhotoRepository";
 import Photo from "../entities/Photo";
 import PhotoCreateBodyValidator from "../validators/Photo/PhotoCreateBodyValidator";
 import PhotoUpdateBodyValidator from "../validators/Photo/PhotoUpdateBodyValidator";
@@ -20,7 +16,7 @@ export default class PhotoService implements IService<Photo>{
    * @private
    */
   public getRepository(): IRepository<Photo> {
-    return PhotoRepository();
+    return photoRepository();
   }
 
   /**
@@ -35,8 +31,13 @@ export default class PhotoService implements IService<Photo>{
    * @param id
    * @param options
    */
-  public async getById(id: number, options?: PhotoGetQueryOptions): Promise<Photo> {
-    const photo = await this.getRepository().findById(id, options);
+  public async getById(
+    id: number, options?: PhotoGetQueryOptions,
+  ): Promise<Photo> {
+    const photo = await this.getRepository().findById(
+      id, options,
+    );
+
     if (!photo) throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
     return photo;
   }
@@ -48,9 +49,10 @@ export default class PhotoService implements IService<Photo>{
    */
   public async create(photoData: PhotoCreateBodyValidator): Promise<Photo> {
     const { userId } = photoData;
+
     return this.getRepository().save({
       ...photoData,
-      user: { id: userId }, 
+      user: { id: userId },
     });
   }
 
@@ -60,12 +62,15 @@ export default class PhotoService implements IService<Photo>{
    * @param id
    * @param photoUpdateDate
    */
-  public async updateById(id: number, photoUpdateDate: PhotoUpdateBodyValidator): Promise<Photo> {
+  public async updateById(
+    id: number, photoUpdateDate: PhotoUpdateBodyValidator,
+  ): Promise<Photo> {
     const photo = await this.getById(id);
+
     if (!photo) throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
     return this.getRepository().save({
       ...photo,
-      ...photoUpdateDate, 
+      ...photoUpdateDate,
     });
   }
 
@@ -76,6 +81,7 @@ export default class PhotoService implements IService<Photo>{
    */
   public async deleteById(id: number): Promise<void> {
     const deleteData = await this.getRepository().delete({ id });
+
     if (deleteData.affected === 0) {
       throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
     }

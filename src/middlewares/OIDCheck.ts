@@ -1,9 +1,9 @@
 import {
-  Request, 
+  Request,
 } from "express";
 import jwt from "express-jwt";
 import {
-  JWTCheckMiddleware, 
+  JWTCheckMiddleware,
 } from "./JWTCheck";
 import Config from "../providers/Config";
 
@@ -22,6 +22,7 @@ class OIDCheckMiddleware extends JWTCheckMiddleware {
   public getOptions(): jwt.Options {
     const baseOptions = JWTCheckMiddleware.prototype.getOptions.call(this);
     const { auth0ClientAudience } = Config.config();
+
     return {
       ...baseOptions,
       audience: auth0ClientAudience,

@@ -1,8 +1,8 @@
 import {
-  Application, 
+  Application,
 } from "express";
 import {
-  IRequestHandler, 
+  IRequestHandler,
 } from "../types/IRequestHandler";
 
 import Log from "../utils/Log";

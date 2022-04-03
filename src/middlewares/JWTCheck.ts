@@ -28,16 +28,16 @@ export class JWTCheckMiddleware implements IMiddleware {
     } = Config.config();
 
     return {
-      secret: jwksRsa.expressJwtSecret({
-        cache                : true,
-        rateLimit            : true,
-        jwksRequestsPerMinute: 5,
-        jwksUri              : auth0jwksUri,
-      }),
+      algorithms     : [ "RS256" ],
       audience       : auth0ServerAudience,
       issuer         : auth0Issuer,
-      algorithms     : [ "RS256" ],
       requestProperty: "auth",
+      secret         : jwksRsa.expressJwtSecret({
+        cache                : true,
+        jwksRequestsPerMinute: 5,
+        jwksUri              : auth0jwksUri,
+        rateLimit            : true,
+      }),
     };
   }
 

@@ -2,22 +2,19 @@ import {
   Application,
   NextFunction,
   Request,
-  Response, 
+  Response,
 } from "express";
-import {
-  QueryFailedError, 
-} from "typeorm";
+import { QueryFailedError } from "typeorm";
 import Log from "../utils/Log";
 import IMiddleware from "../types/IMiddleware";
-import {
-  IRequestErrorHandler, 
-} from "../types/IRequestErrorHandler";
+import { IRequestErrorHandler } from "../types/IRequestErrorHandler";
 import HttpException from "../exceptions/HttpException";
 
 /**
  * Handle exceptions thrown from controllers/services.
  */
 class ClientErrorHandler implements IMiddleware {
+  // eslint-disable-next-line max-params
   private static handler: IRequestErrorHandler = (
     err: Error, req: Request, res: Response, next: NextFunction,
   ) => {

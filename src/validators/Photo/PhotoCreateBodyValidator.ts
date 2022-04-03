@@ -3,10 +3,10 @@ import {
   IsInt,
   IsNotEmpty,
   IsOptional,
-  IsString, 
+  IsString,
 } from "class-validator";
 import {
-  Type, 
+  Type,
 } from "class-transformer";
 
 /**
