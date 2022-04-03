@@ -1,4 +1,7 @@
-import { Response, Request } from "express";
+import {
+  Response,
+  Request, 
+} from "express";
 import Config from "../providers/Config";
 
 /**
@@ -7,7 +10,7 @@ import Config from "../providers/Config";
 class HomeController {
   public static index(_req: Request, res: Response) {
     return res.json({
-      name: Config.config().appName,
+      name       : Config.config().appName,
       description: Config.config().appDescription,
     });
   }

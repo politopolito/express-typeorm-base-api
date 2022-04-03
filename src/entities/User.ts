@@ -1,7 +1,15 @@
 import {
-  Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
-import { IsEmail, Validate } from "class-validator";
+import {
+  IsEmail,
+  Validate,
+} from "class-validator";
 import Photo from "./Photo";
 import UserPasswordValidator from "../validators/User/UserPasswordValidator";
 
@@ -26,35 +34,52 @@ export default class User {
   @UpdateDateColumn()
     updatedAt?: string;
 
-  @Column({ type: "varchar", unique: true })
+  @Column({
+    type  : "varchar",
+    unique: true,
+  })
   @IsEmail()
     email: string;
 
   @Column({ default: false })
     isEmailVerified: boolean;
 
-  @Column({ type: "varchar", nullable: true })
+  @Column({
+    type    : "varchar",
+    nullable: true,
+  })
     firstName?: string;
 
-  @Column({ type: "varchar", nullable: true })
+  @Column({
+    type    : "varchar",
+    nullable: true,
+  })
     lastName?: string;
 
   @Validate(UserPasswordValidator)
-  @Column({ type: "varchar", select: false, nullable: true })
+  @Column({
+    type    : "varchar",
+    select  : false,
+    nullable: true,
+  })
     password?: string;
 
-  @Column({ type: "varchar", nullable: true })
+  @Column({
+    type    : "varchar",
+    nullable: true,
+  })
     avatarUrl?: string;
 
   @OneToMany(
     () => Photo,
     photo => photo.user,
-    { nullable: true, onDelete: "CASCADE" },
+    {
+      nullable: true,
+      onDelete: "CASCADE",
+    },
   )
     photos?: Photo[];
 
-  @Column({
-    default: UserRole.CONTRACTOR,
-  })
+  @Column({ default: UserRole.CONTRACTOR })
     role: UserRole;
 }

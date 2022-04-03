@@ -13,7 +13,10 @@ const PhotoRepository = (): IRepository<Photo> => Database.getConnection().getRe
   findById(id: number, options?: PhotoGetQueryOptions): Promise<Photo> {
     const relations = [];
     if (options.withUserId) relations.push("user");
-    return this.findOne({ where: { id }, relations });
+    return this.findOne({
+      where: { id },
+      relations, 
+    });
   },
 });
 

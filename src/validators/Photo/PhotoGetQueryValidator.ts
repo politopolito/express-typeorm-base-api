@@ -1,4 +1,7 @@
-import { IsIn, IsOptional } from "class-validator";
+import {
+  IsIn,
+  IsOptional, 
+} from "class-validator";
 
 /**
  * Base validator for Photo entity

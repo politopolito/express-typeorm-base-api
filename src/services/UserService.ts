@@ -1,6 +1,10 @@
 /* eslint-disable class-methods-use-this */
-import { Repository } from "typeorm";
-import { IService } from "../types/IService";
+import {
+  Repository, 
+} from "typeorm";
+import {
+  IService, 
+} from "../types/IService";
 import UserRepository from "../repositories/UserRepository";
 import User from "../entities/User";
 import UserCreateBodyValidator from "../validators/User/UserCreateBodyValidator";
@@ -66,7 +70,10 @@ export default class UserService implements IService<User>{
   public async updateById(id: number, userUpdateData: UserUpdateBodyValidator): Promise<User> {
     const user = await this.getById(id);
     const repo = this.getRepository();
-    return repo.save({ ...user, ...userUpdateData });
+    return repo.save({
+      ...user,
+      ...userUpdateData, 
+    });
   }
 
   /**

@@ -1,9 +1,18 @@
-import { IController } from "../types/IController";
+import {
+  IController, 
+} from "../types/IController";
 import UserService from "../services/UserService";
-import { IRequestHandler } from "../types/IRequestHandler";
+import {
+  IRequestHandler, 
+} from "../types/IRequestHandler";
 import User from "../entities/User";
-import { UserDto, UserMapper } from "../mappers/UserMapper";
-import { IMapper } from "../mappers/IMapper";
+import {
+  UserDto,
+  UserMapper, 
+} from "../mappers/UserMapper";
+import {
+  IMapper, 
+} from "../mappers/IMapper";
 
 /**
  * Handle HTTP requests for Users

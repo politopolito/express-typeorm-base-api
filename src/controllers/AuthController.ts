@@ -1,10 +1,21 @@
-import { NextFunction, Response } from "express";
-import { RequestWithAuth } from "../types/Auth/RequestWithAuth";
-import { RequestWithOIDC } from "../types/User/RequestWithUser";
+import {
+  NextFunction,
+  Response, 
+} from "express";
+import {
+  RequestWithAuth, 
+} from "../types/Auth/RequestWithAuth";
+import {
+  RequestWithOIDC, 
+} from "../types/User/RequestWithUser";
 import UserService from "../services/UserService";
-import { UserMapper } from "../mappers/UserMapper";
+import {
+  UserMapper, 
+} from "../mappers/UserMapper";
 import UserController from "./UserController";
-import User, { UserRole } from "../entities/User";
+import User, {
+  UserRole, 
+} from "../entities/User";
 import NotFoundException from "../exceptions/NotFoundException";
 
 /**
@@ -16,22 +27,28 @@ class AuthController extends UserController {
    * @param userService
    * @param userMapper
    */
-  constructor(
-    userService: UserService = new UserService(),
-    userMapper: UserMapper = new UserMapper(),
-  ) {
+  constructor(userService: UserService = new UserService(),
+    userMapper: UserMapper = new UserMapper()) {
     super(userService, userMapper);
   }
 
-  public onSuccess = async (req: RequestWithOIDC & RequestWithAuth, res: Response, next: NextFunction) => {
+  public onSuccess = async (
+    req: RequestWithOIDC & RequestWithAuth, res: Response, next: NextFunction,
+  ) => {
     let user: User;
 
     try {
       user = await this.userService.getByEmail(req.user.email);
     } catch (e) {
       if (e instanceof NotFoundException) {
-        const { email, picture } = req.user;
-        user = await this.userService.create({ email, avatarImg: picture, role: UserRole.CONTRACTOR });
+        const {
+          email, picture, 
+        } = req.user;
+        user = await this.userService.create({
+          email,
+          avatarImg: picture,
+          role     : UserRole.CONTRACTOR, 
+        });
       } else {
         next(e);
       }

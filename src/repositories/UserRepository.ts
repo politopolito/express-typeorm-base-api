@@ -1,4 +1,6 @@
-import { Repository } from "typeorm";
+import {
+  Repository, 
+} from "typeorm";
 import Database from "../providers/Database";
 import User from "../entities/User";
 

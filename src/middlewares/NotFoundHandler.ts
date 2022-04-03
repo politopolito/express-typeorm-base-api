@@ -1,4 +1,8 @@
-import { Application, Request, Response } from "express";
+import {
+  Application,
+  Request,
+  Response, 
+} from "express";
 import Log from "../utils/Log";
 import IMiddleware from "../types/IMiddleware";
 

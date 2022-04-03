@@ -1,4 +1,6 @@
-import { Application } from "express";
+import {
+  Application, 
+} from "express";
 import Config from "./Config";
 import Log from "../utils/Log";
 import apiRouter from "../routes";

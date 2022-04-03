@@ -1,4 +1,6 @@
-import { Router } from "express";
+import {
+  Router, 
+} from "express";
 import HomeController from "../controllers/HomeController";
 import IRouter from "../types/IRouter";
 

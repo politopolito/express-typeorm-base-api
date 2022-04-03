@@ -1,6 +1,10 @@
-import { Request } from "express";
+import {
+  Request, 
+} from "express";
 import jwt from "express-jwt";
-import { JWTCheckMiddleware } from "./JWTCheck";
+import {
+  JWTCheckMiddleware, 
+} from "./JWTCheck";
 import Config from "../providers/Config";
 
 /**

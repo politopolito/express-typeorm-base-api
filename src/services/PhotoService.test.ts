@@ -1,5 +1,7 @@
 import sinon from "sinon";
-import { stubInterface } from "ts-sinon";
+import {
+  stubInterface, 
+} from "ts-sinon";
 import PhotoService from "./PhotoService";
 import NotFoundException from "../exceptions/NotFoundException";
 import getPhotoMock from "../mocks/PhotoMock";
@@ -18,7 +20,9 @@ describe("PhotoService", () => {
 
     // When
     fakeRepo.findById.resolves(photoMock);
-    sandbox.replace(PhotoService.prototype, "getRepository", () => fakeRepo);
+    sandbox.replace(
+      PhotoService.prototype, "getRepository", () => fakeRepo,
+    );
     const res = await new PhotoService().getById(photoMock.id);
 
     // Then
@@ -32,7 +36,9 @@ describe("PhotoService", () => {
 
     // When
     fakeRepo.findById.resolves(null);
-    sandbox.replace(PhotoService.prototype, "getRepository", () => fakeRepo);
+    sandbox.replace(
+      PhotoService.prototype, "getRepository", () => fakeRepo,
+    );
     const userService = new PhotoService();
 
     // Then
@@ -45,16 +51,24 @@ describe("PhotoService", () => {
     const photoMock = getPhotoMock();
     const fakeRepo = stubInterface<IRepository<Photo>>();
     const photoInput = {
-      name: "new_photo", filename: "photo.png", isPublic: true, userId: 1, 
+      name    : "new_photo",
+      filename: "photo.png",
+      isPublic: true,
+      userId  : 1, 
     };
 
     // When
     fakeRepo.save.resolves(photoMock);
-    sandbox.replace(PhotoService.prototype, "getRepository", () => fakeRepo);
+    sandbox.replace(
+      PhotoService.prototype, "getRepository", () => fakeRepo,
+    );
     const res = await new PhotoService().create(photoInput);
 
     // Then
-    expect(fakeRepo.save.calledOnceWithExactly({ ...photoInput, user: { id: photoInput.userId } })).toBeTruthy();
+    expect(fakeRepo.save.calledOnceWithExactly({
+      ...photoInput,
+      user: { id: photoInput.userId }, 
+    })).toBeTruthy();
     expect(res).toEqual(photoMock);
   });
 
@@ -64,11 +78,16 @@ describe("PhotoService", () => {
 
     // When
     fakeRepo.save.throws();
-    sandbox.replace(PhotoService.prototype, "getRepository", () => fakeRepo);
+    sandbox.replace(
+      PhotoService.prototype, "getRepository", () => fakeRepo,
+    );
 
     // Then
     await expect(new PhotoService().create({
-      name: undefined, filename: undefined, isPublic: false, userId: undefined, 
+      name    : undefined,
+      filename: undefined,
+      isPublic: false,
+      userId  : undefined, 
     }))
       .rejects
       .toThrow();
@@ -78,19 +97,29 @@ describe("PhotoService", () => {
   it("updateById success", async () => {
     // Given
     const photoMock = getPhotoMock();
-    const expectedPhoto = { ...photoMock, name: "new_photo" };
+    const expectedPhoto = {
+      ...photoMock,
+      name: "new_photo", 
+    };
     const fakeRepo = stubInterface<IRepository<Photo>>();
     const getById = sinon.fake.resolves(photoMock);
 
     // When
     fakeRepo.save.resolvesArg(0);
-    sandbox.replace(PhotoService.prototype, "getById", getById);
-    sandbox.replace(PhotoService.prototype, "getRepository", () => fakeRepo);
+    sandbox.replace(
+      PhotoService.prototype, "getById", getById,
+    );
+    sandbox.replace(
+      PhotoService.prototype, "getRepository", () => fakeRepo,
+    );
     const res = await new PhotoService().updateById(photoMock.id, { name: expectedPhoto.name });
 
     // Then
     expect(getById.calledOnceWithExactly(photoMock.id)).toBeTruthy();
-    expect(fakeRepo.save.calledOnceWithExactly({ ...photoMock, name: expectedPhoto.name })).toBeTruthy();
+    expect(fakeRepo.save.calledOnceWithExactly({
+      ...photoMock,
+      name: expectedPhoto.name, 
+    })).toBeTruthy();
     expect(res).toEqual(expectedPhoto);
   });
 
@@ -99,7 +128,9 @@ describe("PhotoService", () => {
     const getById = sinon.fake.throws(new NotFoundException(""));
 
     // When
-    sandbox.replace(PhotoService.prototype, "getById", getById);
+    sandbox.replace(
+      PhotoService.prototype, "getById", getById,
+    );
     const userService = new PhotoService();
 
     // Then

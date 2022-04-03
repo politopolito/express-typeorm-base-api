@@ -1,4 +1,6 @@
-import { IRequestHandler } from "./IRequestHandler";
+import {
+  IRequestHandler, 
+} from "./IRequestHandler";
 
 export interface IController {
   getById?: IRequestHandler;

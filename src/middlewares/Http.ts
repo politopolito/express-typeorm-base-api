@@ -1,5 +1,9 @@
-import { Application } from "express";
-import { IRequestHandler } from "../types/IRequestHandler";
+import {
+  Application, 
+} from "express";
+import {
+  IRequestHandler, 
+} from "../types/IRequestHandler";
 
 import Log from "../utils/Log";
 import IMiddleware from "../types/IMiddleware";
@@ -8,7 +12,9 @@ import IMiddleware from "../types/IMiddleware";
  * Inject logging timestamp for each request
  */
 class Http implements IMiddleware {
-  private static handler: IRequestHandler = (_req, _res, next) => {
+  private static handler: IRequestHandler = (
+    _req, _res, next,
+  ) => {
     Log.info(`Time: ${Date.now()}`);
     next();
   };

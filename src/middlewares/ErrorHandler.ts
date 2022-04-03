@@ -1,4 +1,6 @@
-import { Application } from "express";
+import {
+  Application, 
+} from "express";
 import IMiddleware from "../types/IMiddleware";
 import NotFoundHandler from "./NotFoundHandler";
 import ClientErrorHandler from "./ClientErrorHandler";

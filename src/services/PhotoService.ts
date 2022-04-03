@@ -1,6 +1,10 @@
 /* eslint-disable class-methods-use-this */
-import { IService } from "../types/IService";
-import PhotoRepository, { PhotoGetQueryOptions } from "../repositories/PhotoRepository";
+import {
+  IService, 
+} from "../types/IService";
+import PhotoRepository, {
+  PhotoGetQueryOptions, 
+} from "../repositories/PhotoRepository";
 import Photo from "../entities/Photo";
 import PhotoCreateBodyValidator from "../validators/Photo/PhotoCreateBodyValidator";
 import PhotoUpdateBodyValidator from "../validators/Photo/PhotoUpdateBodyValidator";
@@ -44,7 +48,10 @@ export default class PhotoService implements IService<Photo>{
    */
   public async create(photoData: PhotoCreateBodyValidator): Promise<Photo> {
     const { userId } = photoData;
-    return this.getRepository().save({ ...photoData, user: { id: userId } });
+    return this.getRepository().save({
+      ...photoData,
+      user: { id: userId }, 
+    });
   }
 
   /**
@@ -56,7 +63,10 @@ export default class PhotoService implements IService<Photo>{
   public async updateById(id: number, photoUpdateDate: PhotoUpdateBodyValidator): Promise<Photo> {
     const photo = await this.getById(id);
     if (!photo) throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
-    return this.getRepository().save({ ...photo, ...photoUpdateDate });
+    return this.getRepository().save({
+      ...photo,
+      ...photoUpdateDate, 
+    });
   }
 
   /**

@@ -1,10 +1,21 @@
-import { IController } from "../types/IController";
+import {
+  IController, 
+} from "../types/IController";
 import PhotoService from "../services/PhotoService";
-import { IRequestHandler } from "../types/IRequestHandler";
+import {
+  IRequestHandler, 
+} from "../types/IRequestHandler";
 import Photo from "../entities/Photo";
-import { PhotoDto, PhotoMapper } from "../mappers/PhotoMapper";
-import { PhotoGetRequest } from "../types/Photo/PhotoGetRequest";
-import { IMapper } from "../mappers/IMapper";
+import {
+  PhotoDto,
+  PhotoMapper, 
+} from "../mappers/PhotoMapper";
+import {
+  PhotoGetRequest, 
+} from "../types/Photo/PhotoGetRequest";
+import {
+  IMapper, 
+} from "../mappers/IMapper";
 
 /**
  * Handle HTTP requests for Photos
@@ -27,10 +38,8 @@ class PhotoController implements IController {
    * @param photoService
    * @param photoMapper
    */
-  constructor(
-    photoService: PhotoService = new PhotoService(),
-    photoMapper: IMapper<Photo, PhotoDto> = new PhotoMapper(),
-  ) {
+  constructor(photoService: PhotoService = new PhotoService(),
+    photoMapper: IMapper<Photo, PhotoDto> = new PhotoMapper()) {
     this.photoService = photoService;
     this.photoMapper = photoMapper;
   }
@@ -43,10 +52,8 @@ class PhotoController implements IController {
    */
   public getById: IRequestHandler<PhotoGetRequest> = async (req, res) => {
     const { withUserId } = req.query;
-    const photo = await this.photoService.getById(
-      Number(req.params.id),
-      { withUserId: withUserId === "true" },
-    );
+    const photo = await this.photoService.getById(Number(req.params.id),
+      { withUserId: withUserId === "true" });
     res.status(200).json({ data: this.photoMapper.toDto(photo) });
   };
 

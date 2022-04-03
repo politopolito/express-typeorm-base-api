@@ -1,5 +1,7 @@
 import Photo from "../entities/Photo";
-import { IMapper } from "./IMapper";
+import {
+  IMapper, 
+} from "./IMapper";
 
 export interface PhotoDto {
   id: number;
@@ -8,6 +10,8 @@ export interface PhotoDto {
   filename: string;
   isPublic: boolean;
   userId?: number;
+  updatedAt: Date;
+  createdAt: Date;
 }
 
 /**
@@ -16,12 +20,14 @@ export interface PhotoDto {
 export class PhotoMapper implements IMapper<Photo, PhotoDto>{
   toDto(p: Photo): PhotoDto {
     return {
-      id: p.id,
-      name: p.name,
+      id         : p.id,
+      name       : p.name,
       description: p.description,
-      filename: p.filename,
-      isPublic: p.isPublic,
-      userId: p.user?.id,
+      filename   : p.filename,
+      isPublic   : p.isPublic,
+      userId     : p.user?.id,
+      updatedAt  : new Date(p.updatedAt),
+      createdAt  : new Date(p.createdAt),
     };
   }
 }

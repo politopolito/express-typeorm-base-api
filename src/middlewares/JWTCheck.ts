@@ -29,14 +29,14 @@ export class JWTCheckMiddleware implements IMiddleware {
 
     return {
       secret: jwksRsa.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
+        cache                : true,
+        rateLimit            : true,
         jwksRequestsPerMinute: 5,
-        jwksUri: auth0jwksUri,
+        jwksUri              : auth0jwksUri,
       }),
-      audience: auth0ServerAudience,
-      issuer: auth0Issuer,
-      algorithms: [ "RS256" ],
+      audience       : auth0ServerAudience,
+      issuer         : auth0Issuer,
+      algorithms     : [ "RS256" ],
       requestProperty: "auth",
     };
   }

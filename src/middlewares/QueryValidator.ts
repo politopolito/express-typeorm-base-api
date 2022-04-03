@@ -1,17 +1,22 @@
-import { validate, ValidationError } from "class-validator";
-import { plainToInstance } from "class-transformer";
+import {
+  validate,
+  ValidationError, 
+} from "class-validator";
+import {
+  plainToInstance, 
+} from "class-transformer";
 import HttpException from "../exceptions/HttpException";
-import { IRequestHandler } from "../types/IRequestHandler";
+import {
+  IRequestHandler, 
+} from "../types/IRequestHandler";
 
 /**
  * Validate interface of req.query
  * @param type - expected interface
  * @param skipMissingProperties - should ignore missing properties from interface
  */
-const QueryValidator = (
-  type: any, // eslint-disable-line @typescript-eslint/no-explicit-any
-  skipMissingProperties = false,
-): IRequestHandler => (
+const QueryValidator = (type: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+  skipMissingProperties = false): IRequestHandler => (
   req,
   res,
   next,

@@ -5,6 +5,7 @@ module.exports = {
 		"@typescript-eslint",
 		"jest",
 		"import",
+		"modules-newlines",
 	],
 	parserOptions: {
 		project: "./tsconfig.json"
@@ -35,14 +36,34 @@ module.exports = {
 	},
 	rules: {
 		"no-console": "off", // FOR TESTING ONLY
+
+		/**
+		 * Consistency & readability
+		 */
 		"class-methods-use-this": "off",
 		"no-param-reassign": "off",
 		curly: "error",
-		"@typescript-eslint/quotes": [ "error", "double", { "avoidEscape": true, "allowTemplateLiterals": true } ],
-		"array-bracket-spacing": [ "error", "always" ],
-		"object-curly-newline": "error",
-		"object-curly-spacing": [ "error", "always", { "arraysInObjects": true } ],
 		"import/no-cycle": "off",
-		"@typescript-eslint/no-use-before-define": "off"
+		"@typescript-eslint/no-use-before-define": "off",
+		"@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "_.*" }],
+
+		/**
+		 * Styling
+		 */
+		"@typescript-eslint/quotes": [ "error", "double", { avoidEscape: true, allowTemplateLiterals: true } ],
+		"array-bracket-spacing": [ "error", "always" ],
+		"object-curly-newline": ["error", {
+			multiline: true,
+			minProperties: 2,
+			consistent: true ,
+		}],
+		"object-property-newline": ["error", { allowAllPropertiesOnSameLine: false }],
+		"comma-spacing": ["error", { before: false, after: true }],
+		"comma-dangle": ["error", "always-multiline"],
+		"key-spacing": ["error", { beforeColon: false, afterColon: true, mode: "strict", align: "colon" }],
+		"object-curly-spacing": ["error", "always", { arraysInObjects: true } ],
+		"function-paren-newline": ["error", { minItems: 3 }],
+		"modules-newlines/import-declaration-newline": "error",
+		"modules-newlines/export-declaration-newline": "error",
 	}
 };

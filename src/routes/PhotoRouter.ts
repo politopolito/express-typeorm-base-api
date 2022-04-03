@@ -1,4 +1,6 @@
-import { Router } from "express";
+import {
+  Router, 
+} from "express";
 import PhotoController from "../controllers/PhotoController";
 import IRouter from "../types/IRouter";
 import PhotoCreateBodyValidator from "../validators/Photo/PhotoCreateBodyValidator";
@@ -26,10 +28,18 @@ class PhotoRouter implements IRouter {
   }
 
   initializeRoutes() {
-    this.router.get(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoGetParamsValidator), QueryValidator(PhotoGetQueryValidator), this.photoController.getById);
-    this.router.patch(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), BodyValidator(PhotoUpdateBodyValidator), this.photoController.updateById);
-    this.router.delete(`${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), this.photoController.deleteById);
-    this.router.post(this.path, BodyValidator(PhotoCreateBodyValidator, false), this.photoController.create);
+    this.router.get(
+      `${this.path}/:id(\\d+)`, ParamsValidator(PhotoGetParamsValidator), QueryValidator(PhotoGetQueryValidator), this.photoController.getById,
+    );
+    this.router.patch(
+      `${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), BodyValidator(PhotoUpdateBodyValidator), this.photoController.updateById,
+    );
+    this.router.delete(
+      `${this.path}/:id(\\d+)`, ParamsValidator(PhotoUpdateParamsValidator, false), this.photoController.deleteById,
+    );
+    this.router.post(
+      this.path, BodyValidator(PhotoCreateBodyValidator, false), this.photoController.create,
+    );
   }
 }
 

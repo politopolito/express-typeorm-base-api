@@ -1,5 +1,8 @@
 import {
-  IsBoolean, IsEmpty, IsOptional, IsString,
+  IsBoolean,
+  IsEmpty,
+  IsOptional,
+  IsString, 
 } from "class-validator";
 
 /**

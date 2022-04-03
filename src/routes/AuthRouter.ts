@@ -1,4 +1,6 @@
-import { Router } from "express";
+import {
+  Router, 
+} from "express";
 import AuthController from "../controllers/AuthController";
 import IRouter from "../types/IRouter";
 import JWTCheck from "../middlewares/JWTCheck";
@@ -24,7 +26,9 @@ class AuthRouter implements IRouter {
      * Validate OAuth2 Bearer Token Authentication,
      * and persist user if first login.
      */
-    this.router.post(`${this.path}/onSuccess`, JWTCheck.use(), OIDCheck.use(), this.authController.onSuccess);
+    this.router.post(
+      `${this.path}/onSuccess`, JWTCheck.use(), OIDCheck.use(), this.authController.onSuccess,
+    );
   }
 }
 

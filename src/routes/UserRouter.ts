@@ -1,4 +1,6 @@
-import { Router } from "express";
+import {
+  Router, 
+} from "express";
 import UserController from "../controllers/UserController";
 import IRouter from "../types/IRouter";
 import UserCreateBodyValidator from "../validators/User/UserCreateBodyValidator";
@@ -24,10 +26,18 @@ class UserRouter implements IRouter {
   }
 
   initializeRoutes() {
-    this.router.get(`${this.path}/:id(\\d+)`, ParamsValidator(UserGetParamsValidator), this.UserController.getById);
-    this.router.patch(`${this.path}/:id(\\d+)`, ParamsValidator(UserUpdateParamsValidator), BodyValidator(UserUpdateBodyValidator, true), this.UserController.updateById);
-    this.router.delete(`${this.path}/:id(\\d+)`, ParamsValidator(UserUpdateParamsValidator), this.UserController.deleteById);
-    this.router.post(this.path, BodyValidator(UserCreateBodyValidator), this.UserController.create);
+    this.router.get(
+      `${this.path}/:id(\\d+)`, ParamsValidator(UserGetParamsValidator), this.UserController.getById,
+    );
+    this.router.patch(
+      `${this.path}/:id(\\d+)`, ParamsValidator(UserUpdateParamsValidator), BodyValidator(UserUpdateBodyValidator, true), this.UserController.updateById,
+    );
+    this.router.delete(
+      `${this.path}/:id(\\d+)`, ParamsValidator(UserUpdateParamsValidator), this.UserController.deleteById,
+    );
+    this.router.post(
+      this.path, BodyValidator(UserCreateBodyValidator), this.UserController.create,
+    );
   }
 }
 
