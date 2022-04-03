@@ -1,19 +1,17 @@
-import User, {
-  UserRole, 
-} from "../entities/User";
-import Photo from "../entities/Photo";
-import {
-  IMapper, 
-} from "./IMapper";
+import User, { UserRole } from "../entities/User";
+import { IMapper } from "./IMapper";
 
 export interface UserDto {
   id: number;
   email: string;
+  isEmailVerified: boolean;
   firstName: string;
   lastName: string;
   avatarUrl: string;
   role: UserRole;
-  photos?: Photo[];
+  photosId?: number[];
+  createdAt: Date,
+  updatedAt: Date;
 }
 
 /**
@@ -22,13 +20,16 @@ export interface UserDto {
 export class UserMapper implements IMapper<User, UserDto> {
   toDto(u: User): UserDto {
     return {
-      id       : u.id,
-      email    : u.email,
-      firstName: u.firstName,
-      lastName : u.lastName,
-      avatarUrl: u.avatarUrl,
-      role     : u.role,
-      photos   : u.photos?.length > 0 ? u.photos : null,
+      id             : u.id,
+      email          : u.email,
+      isEmailVerified: u.isEmailVerified,
+      firstName      : u.firstName,
+      lastName       : u.lastName,
+      avatarUrl      : u.avatarUrl,
+      role           : u.role,
+      photosId       : u.photos?.length > 0 ? u.photos.map(p => p.id) : null,
+      updatedAt      : new Date(u.updatedAt),
+      createdAt      : new Date(u.createdAt),
     };
   }
 }

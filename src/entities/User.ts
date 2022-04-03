@@ -12,6 +12,7 @@ import {
 } from "class-validator";
 import Photo from "./Photo";
 import UserPasswordValidator from "../validators/User/UserPasswordValidator";
+import IEntityWithFactoryMethod from "../types/IEntityWithFactoryMethod";
 
 export enum UserRole {
   ADMIN = "ADMIN",
@@ -24,7 +25,7 @@ export enum UserRole {
 }
 
 @Entity()
-export default class User {
+export default class User extends IEntityWithFactoryMethod {
   @PrimaryGeneratedColumn()
     id: number;
 
