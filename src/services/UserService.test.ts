@@ -184,5 +184,47 @@ describe(
         expect(getById.calledOnceWithExactly(999)).toBeTruthy();
       },
     );
+
+    it(
+      "deleteById success", async () => {
+        // Given
+        const fakeRepo = sinon.createStubInstance(Repository);
+
+        // When
+        fakeRepo.delete.resolves({
+          affected: 1,
+          raw     : undefined,
+        });
+        sandbox.replace(
+          UserService.prototype, "getRepository", () => fakeRepo,
+        );
+        const res = await new UserService().deleteById(1);
+
+        // Then
+        expect(fakeRepo.delete.calledOnceWithExactly({ id: 1 })).toBeTruthy();
+        expect(res).toBeUndefined();
+      },
+    );
+
+    it(
+      "deleteById should throw when not found", async () => {
+        // Given
+        const fakeRepo = sinon.createStubInstance(Repository);
+
+        // When
+        fakeRepo.delete.resolves({
+          affected: 0,
+          raw     : undefined,
+        });
+        sandbox.replace(
+          UserService.prototype, "getRepository", () => fakeRepo,
+        );
+        const userService = new UserService();
+
+        // Then
+        await expect(userService.deleteById(1)).rejects.toThrow(NotFoundException);
+        expect(fakeRepo.delete.calledOnceWithExactly({ id: 1 } )).toBeTruthy();
+      },
+    );
   },
 );
