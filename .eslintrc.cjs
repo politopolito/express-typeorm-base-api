@@ -46,6 +46,7 @@ module.exports = {
 		"import/no-cycle": "off",
 		"@typescript-eslint/no-use-before-define": "off",
 		"@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "_.*" }],
+		"import/no-extraneous-dependencies": ["error", { devDependencies: ["**/*.test.ts", "src/mocks/*"] }],
 
 		/**
 		 * Styling
