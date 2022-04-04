@@ -21,3 +21,8 @@
   * `types`: Shared interfaces for reusable code.
   * `utils`: Utility functions.
   * `validators`: Class validators for parsing request parameters.
+
+## Testing
+
+* Please make sure to keep line coverage above %80.
+* Tests should be placed in the same folder as the target file being tested. For example, `/services/UserService.ts` will have a `/services/UserService.test.ts` file.
