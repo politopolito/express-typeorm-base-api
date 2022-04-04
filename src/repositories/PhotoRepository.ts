@@ -1,5 +1,6 @@
 import Photo from "../entities/Photo";
 import Database from "../providers/Database";
+import IRepository from "../types/IRepository";
 
 export interface PhotoGetQueryOptions {
   withUserId?: boolean;
@@ -8,12 +9,19 @@ export interface PhotoGetQueryOptions {
 /**
  * Concrete repository for Photos
  */
-const PhotoRepository = () => Database.getConnection().getRepository(Photo).extend({
-  findById(id: number, options: PhotoGetQueryOptions): Promise<Photo> {
-    const relations = [];
-    if (options.withUserId) relations.push("user");
-    return this.findOne({ where: { id }, relations });
-  },
-});
+const photoRepository = (): IRepository<Photo> => Database.getConnection().getRepository(Photo)
+  .extend({
+    findById(
+      id: number, options?: PhotoGetQueryOptions,
+    ): Promise<Photo> {
+      const relations = [];
 
-export default PhotoRepository;
+      if (options.withUserId) relations.push("user");
+      return this.findOne({
+        relations,
+        where: { id },
+      });
+    },
+  });
+
+export default photoRepository;

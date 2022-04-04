@@ -1,11 +1,32 @@
-import { IsInt, IsNotEmpty } from "class-validator";
+import {
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from "class-validator";
 import { Type } from "class-transformer";
-import PhotoValidator from "./PhotoValidator";
 
 /**
  * Validate photo's create request body
  */
-export default class PhotoCreateBodyValidator extends PhotoValidator {
+export default class PhotoCreateBodyValidator {
+  @IsString()
+  @IsNotEmpty()
+    name: string;
+
+  @IsString()
+  @IsOptional()
+    description?: string;
+
+  @IsString()
+  @IsNotEmpty()
+    filename: string;
+
+  @IsBoolean()
+  @IsOptional()
+    isPublic?: boolean;
+
   @IsInt()
   @IsNotEmpty()
   @Type(() => Number)

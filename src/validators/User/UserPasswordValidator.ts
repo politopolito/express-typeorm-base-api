@@ -1,7 +1,13 @@
 /* eslint-disable class-methods-use-this */
-import { ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
+import {
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+} from "class-validator";
 
-@ValidatorConstraint({ name: "userPassword", async: false })
+@ValidatorConstraint({
+  async: false,
+  name : "userPassword",
+})
 export default class UserPasswordValidator implements ValidatorConstraintInterface {
   validate(text: string): boolean {
     const hasMinLength = text.length >= 8;

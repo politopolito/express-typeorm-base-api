@@ -1,4 +1,6 @@
-import { Router } from "express";
+import {
+  Router,
+} from "express";
 import HomeRouter from "./HomeRouter";
 import PhotoRouter from "./PhotoRouter";
 import UserRouter from "./UserRouter";

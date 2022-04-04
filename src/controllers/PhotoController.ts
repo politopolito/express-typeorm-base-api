@@ -2,9 +2,14 @@ import { IController } from "../types/IController";
 import PhotoService from "../services/PhotoService";
 import { IRequestHandler } from "../types/IRequestHandler";
 import Photo from "../entities/Photo";
-import { PhotoDto, PhotoMapper } from "../mappers/PhotoMapper";
+import {
+  PhotoDto,
+  PhotoMapper,
+} from "../mappers/PhotoMapper";
 import { PhotoGetRequest } from "../types/Photo/PhotoGetRequest";
 import { IMapper } from "../mappers/IMapper";
+import { PhotoUpdateRequest } from "../types/Photo/PhotoUpdateRequest";
+import { PhotoCreateRequest } from "../types/Photo/PhotoCreateRequest";
 
 /**
  * Handle HTTP requests for Photos
@@ -41,12 +46,16 @@ class PhotoController implements IController {
    * @param req
    * @param res
    */
-  public getById: IRequestHandler<PhotoGetRequest> = async (req, res) => {
+  public getById: IRequestHandler<PhotoGetRequest> = async (
+    req, res,
+  ) => {
     const { withUserId } = req.query;
     const photo = await this.photoService.getById(
       Number(req.params.id),
       { withUserId: withUserId === "true" },
     );
+
+    console.log(this.photoMapper.toDto(photo));
     res.status(200).json({ data: this.photoMapper.toDto(photo) });
   };
 
@@ -56,8 +65,11 @@ class PhotoController implements IController {
    * @param req
    * @param res
    */
-  public create: IRequestHandler = async (req, res) => {
+  public create: IRequestHandler<PhotoCreateRequest> = async (
+    req, res,
+  ) => {
     const photo = await this.photoService.create(req.body);
+
     res.status(201).json({ data: this.photoMapper.toDto(photo) });
   };
 
@@ -67,9 +79,14 @@ class PhotoController implements IController {
    * @param req
    * @param res
    */
-  public updateById: IRequestHandler = async (req, res) => {
+  public updateById: IRequestHandler<PhotoUpdateRequest> = async (
+    req, res,
+  ) => {
     const photoUpdatePayload = req.body;
-    const photo = await this.photoService.updateById(Number(req.params.id), photoUpdatePayload);
+    const photo = await this.photoService.updateById(
+      Number(req.params.id), photoUpdatePayload,
+    );
+
     res.status(200).json({ data: this.photoMapper.toDto(photo) });
   };
 
@@ -79,7 +96,9 @@ class PhotoController implements IController {
    * @param req
    * @param res
    */
-  public deleteById: IRequestHandler = async (req, res) => {
+  public deleteById: IRequestHandler = async (
+    req, res,
+  ) => {
     await this.photoService.deleteById(Number(req.params.id));
     res.sendStatus(204);
   };

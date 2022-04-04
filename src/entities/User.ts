@@ -1,9 +1,18 @@
 import {
-  Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
-import { IsEmail, Validate } from "class-validator";
+import {
+  IsEmail,
+  Validate,
+} from "class-validator";
 import Photo from "./Photo";
 import UserPasswordValidator from "../validators/User/UserPasswordValidator";
+import IEntityWithFactoryMethod from "../types/IEntityWithFactoryMethod";
 
 export enum UserRole {
   ADMIN = "ADMIN",
@@ -16,7 +25,7 @@ export enum UserRole {
 }
 
 @Entity()
-export default class User {
+export default class User extends IEntityWithFactoryMethod {
   @PrimaryGeneratedColumn()
     id: number;
 
@@ -26,35 +35,52 @@ export default class User {
   @UpdateDateColumn()
     updatedAt?: string;
 
-  @Column({ type: "varchar", unique: true })
+  @Column({
+    type  : "varchar",
+    unique: true,
+  })
   @IsEmail()
     email: string;
 
   @Column({ default: false })
-  isEmailVerified: boolean;
+    isEmailVerified: boolean;
 
-  @Column({ type: "varchar", nullable: true })
-    firstName: string;
+  @Column({
+    nullable: true,
+    type    : "varchar",
+  })
+    firstName?: string;
 
-  @Column({ type: "varchar", nullable: true })
-    lastName: string;
+  @Column({
+    nullable: true,
+    type    : "varchar",
+  })
+    lastName?: string;
 
   @Validate(UserPasswordValidator)
-  @Column({ type: "varchar", select: false, nullable: true })
-    password: string;
+  @Column({
+    nullable: true,
+    select  : false,
+    type    : "varchar",
+  })
+    password?: string;
 
-  @Column({ type: "varchar", nullable: true })
+  @Column({
+    nullable: true,
+    type    : "varchar",
+  })
     avatarUrl?: string;
 
   @OneToMany(
     () => Photo,
     photo => photo.user,
-    { nullable: true, onDelete: "CASCADE" },
+    {
+      nullable: true,
+      onDelete: "CASCADE",
+    },
   )
     photos?: Photo[];
 
-  @Column({
-    default: UserRole.CONTRACTOR,
-  })
+  @Column({ default: UserRole.CONTRACTOR })
     role: UserRole;
 }

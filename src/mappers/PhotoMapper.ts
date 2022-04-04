@@ -8,6 +8,8 @@ export interface PhotoDto {
   filename: string;
   isPublic: boolean;
   userId?: number;
+  updatedAt: Date;
+  createdAt: Date;
 }
 
 /**
@@ -16,12 +18,14 @@ export interface PhotoDto {
 export class PhotoMapper implements IMapper<Photo, PhotoDto>{
   toDto(p: Photo): PhotoDto {
     return {
-      id: p.id,
-      name: p.name,
+      createdAt  : new Date(p.createdAt),
       description: p.description,
-      filename: p.filename,
-      isPublic: p.isPublic,
-      userId: p.user?.id,
+      filename   : p.filename,
+      id         : p.id,
+      isPublic   : p.isPublic,
+      name       : p.name,
+      updatedAt  : new Date(p.updatedAt),
+      userId     : p.user?.id,
     };
   }
 }

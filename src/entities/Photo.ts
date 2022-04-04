@@ -1,18 +1,24 @@
 import {
-  Column, PrimaryGeneratedColumn, Entity, CreateDateColumn, UpdateDateColumn, ManyToOne,
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
 } from "typeorm";
 import User from "./User";
+import IEntityWithFactoryMethod from "../types/IEntityWithFactoryMethod";
 
 @Entity()
-export default class Photo {
+export default class Photo extends IEntityWithFactoryMethod {
   @PrimaryGeneratedColumn()
     id: number;
 
   @CreateDateColumn()
-    createdAt?: string;
+    createdAt: string;
 
   @UpdateDateColumn()
-    updatedAt?: string;
+    updatedAt: string;
 
   @Column()
     name: string;
@@ -26,6 +32,8 @@ export default class Photo {
   @Column({ default: false })
     isPublic: boolean;
 
-  @ManyToOne(() => User, (user: User) => user.photos)
+  @ManyToOne(
+    () => User, (user: User) => user.photos,
+  )
     user: User;
 }

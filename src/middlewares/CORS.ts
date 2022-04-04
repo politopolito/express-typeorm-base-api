@@ -12,8 +12,8 @@ class CORS implements IMiddleware {
     Log.info("Middlewares :: Mounting 'CORS'...");
 
     _express.use(cors({
-      origin: Config.config().appURL,
       allowedHeaders: [ "Authorization", "Content-Type" ],
+      origin        : Config.config().appURL,
     }));
   }
 }

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1649082168858" clover="3.2.0">
+  <project timestamp="1649082168858" name="All files">
+    <metrics statements="197" coveredstatements="168" conditionals="55" coveredconditionals="22" methods="54" coveredmethods="33" elements="306" coveredelements="223" complexity="0" loc="197" ncloc="197" packages="11" files="21" classes="21"/>
+    <package name="controllers">
+      <metrics statements="38" coveredstatements="38" conditionals="4" coveredconditionals="2" methods="10" coveredmethods="10"/>
+      <file name="PhotoController.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\controllers\PhotoController.ts">
+        <metrics statements="20" coveredstatements="20" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="5"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="40" count="8" type="stmt"/>
+        <line num="49" count="8" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="68" count="8" type="stmt"/>
+        <line num="71" count="2" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="82" count="8" type="stmt"/>
+        <line num="85" count="2" type="stmt"/>
+        <line num="86" count="2" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="99" count="8" type="stmt"/>
+        <line num="102" count="2" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+      </file>
+      <file name="UserController.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\controllers\UserController.ts">
+        <metrics statements="18" coveredstatements="18" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="5"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="38" count="8" type="stmt"/>
+        <line num="39" count="8" type="stmt"/>
+        <line num="48" count="8" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="64" count="8" type="stmt"/>
+        <line num="67" count="2" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="80" count="8" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="84" count="2" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="99" count="8" type="stmt"/>
+        <line num="102" count="2" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="entities">
+      <metrics statements="40" coveredstatements="37" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="1"/>
+      <file name="Photo.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\entities\Photo.ts">
+        <metrics statements="13" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="24" count="6" type="stmt"/>
+        <line num="27" count="6" type="stmt"/>
+        <line num="30" count="6" type="stmt"/>
+        <line num="33" count="6" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="38" count="6" type="stmt"/>
+      </file>
+      <file name="User.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\entities\User.ts">
+        <metrics statements="27" coveredstatements="25" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="1"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="14" count="6" type="stmt"/>
+        <line num="15" count="6" type="stmt"/>
+        <line num="17" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
+        <line num="24" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="30" count="6" type="stmt"/>
+        <line num="33" count="6" type="stmt"/>
+        <line num="36" count="6" type="stmt"/>
+        <line num="43" count="6" type="stmt"/>
+        <line num="46" count="6" type="stmt"/>
+        <line num="52" count="6" type="stmt"/>
+        <line num="58" count="6" type="stmt"/>
+        <line num="66" count="6" type="stmt"/>
+        <line num="72" count="6" type="stmt"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="82" count="6" type="stmt"/>
+        <line num="85" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="exceptions">
+      <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+      <file name="HttpException.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\exceptions\HttpException.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="12" count="16" type="stmt"/>
+        <line num="13" count="16" type="stmt"/>
+        <line num="14" count="16" type="stmt"/>
+      </file>
+      <file name="NotFoundException.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\exceptions\NotFoundException.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="6" count="5" type="stmt"/>
+        <line num="8" count="13" type="stmt"/>
+      </file>
+    </package>
+    <package name="mappers">
+      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
+      <file name="PhotoMapper.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\mappers\PhotoMapper.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+      </file>
+      <file name="UserMapper.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\mappers\UserMapper.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="22" count="7" type="stmt"/>
+        <line num="31" count="14" type="stmt"/>
+      </file>
+    </package>
+    <package name="mocks">
+      <metrics statements="17" coveredstatements="17" conditionals="9" coveredconditionals="8" methods="4" coveredmethods="4"/>
+      <file name="PhotoMock.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\mocks\PhotoMock.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="4" count="7" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+      </file>
+      <file name="RequestMock.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\mocks\RequestMock.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="9" coveredconditionals="8" methods="1" coveredmethods="1"/>
+        <line num="9" count="16" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="2" type="stmt"/>
+      </file>
+      <file name="ResponseMock.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\mocks\ResponseMock.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="16" type="stmt"/>
+        <line num="6" count="16" type="stmt"/>
+        <line num="7" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+      </file>
+      <file name="UserMock.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\mocks\UserMock.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="4" count="15" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="providers">
+      <metrics statements="19" coveredstatements="8" conditionals="21" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="Config.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\providers\Config.ts">
+        <metrics statements="10" coveredstatements="4" conditionals="21" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="81" count="4" type="stmt"/>
+      </file>
+      <file name="Database.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\providers\Database.ts">
+        <metrics statements="9" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="repositories">
+      <metrics statements="13" coveredstatements="8" conditionals="1" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="PhotoRepository.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\repositories\PhotoRepository.ts">
+        <metrics statements="7" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+      </file>
+      <file name="UserRepository.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\repositories\UserRepository.ts">
+        <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="services">
+      <metrics statements="37" coveredstatements="35" conditionals="6" coveredconditionals="5" methods="13" coveredmethods="11"/>
+      <file name="PhotoService.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\services\PhotoService.ts">
+        <metrics statements="16" coveredstatements="15" conditionals="3" coveredconditionals="2" methods="6" coveredmethods="5"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="41" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="70" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="83" count="2" type="stmt"/>
+        <line num="85" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="86" count="1" type="stmt"/>
+      </file>
+      <file name="UserService.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\services\UserService.ts">
+        <metrics statements="21" coveredstatements="20" conditionals="3" coveredconditionals="3" methods="7" coveredmethods="6"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="39" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="55" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="81" count="2" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="96" count="2" type="stmt"/>
+        <line num="98" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="99" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="types">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="IEntityWithFactoryMethod.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\types\IEntityWithFactoryMethod.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="9" count="22" type="stmt"/>
+      </file>
+    </package>
+    <package name="utils">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+      <file name="Log.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\utils\Log.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="validators.User">
+      <metrics statements="10" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <file name="UserPasswordValidator.ts" path="C:\Users\ignac\Documents\GitHub\express-typeorm-auth0-base\src\validators\User\UserPasswordValidator.ts">
+        <metrics statements="10" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="29" count="0" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

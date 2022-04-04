@@ -2,8 +2,13 @@ import { IController } from "../types/IController";
 import UserService from "../services/UserService";
 import { IRequestHandler } from "../types/IRequestHandler";
 import User from "../entities/User";
-import { UserDto, UserMapper } from "../mappers/UserMapper";
+import {
+  UserDto,
+  UserMapper,
+} from "../mappers/UserMapper";
 import { IMapper } from "../mappers/IMapper";
+import { UserCreateRequest } from "../types/User/UserCreateRequest";
+import { UserUpdateRequest } from "../types/User/UserUpdateRequest";
 
 /**
  * Handle HTTP requests for Users
@@ -26,7 +31,10 @@ class UserController implements IController {
    * @param userService
    * @param userMapper
    */
-  constructor(userService: UserService = new UserService(), userMapper: IMapper<User, UserDto> = new UserMapper()) {
+  constructor(
+    userService: UserService = new UserService(),
+    userMapper: IMapper<User, UserDto> = new UserMapper(),
+  ) {
     this.userService = userService;
     this.userMapper = userMapper;
   }
@@ -37,9 +45,14 @@ class UserController implements IController {
    * @param req
    * @param res
    */
-  public getById: IRequestHandler = async (req, res) => {
+  public getById: IRequestHandler = async (
+    req, res,
+  ) => {
     const user = await this.userService.getById(Number(req.params.id));
-    res.status(200).json({ data: this.userMapper.toDto(user) });
+
+    res.status(200).json({
+      data: this.userMapper.toDto(user),
+    });
   };
 
   /**
@@ -48,9 +61,14 @@ class UserController implements IController {
    * @param req
    * @param res
    */
-  public create: IRequestHandler = async (req, res) => {
+  public create: IRequestHandler<UserCreateRequest> = async (
+    req, res,
+  ) => {
     const user = await this.userService.create(req.body);
-    res.status(201).json({ data: this.userMapper.toDto(user) });
+
+    res.status(201).json({
+      data: this.userMapper.toDto(user),
+    });
   };
 
   /**
@@ -59,10 +77,17 @@ class UserController implements IController {
    * @param req
    * @param res
    */
-  public updateById: IRequestHandler = async (req, res) => {
+  public updateById: IRequestHandler<UserUpdateRequest> = async (
+    req, res,
+  ) => {
     const userUpdatePayload = req.body;
-    const user = await this.userService.updateById(Number(req.params.id), userUpdatePayload);
-    res.status(200).json({ data: this.userMapper.toDto(user) });
+    const user = await this.userService.updateById(
+      Number(req.params.id), userUpdatePayload,
+    );
+
+    res.status(200).json({
+      data: this.userMapper.toDto(user),
+    });
   };
 
   /**
@@ -71,7 +96,9 @@ class UserController implements IController {
    * @param req
    * @param res
    */
-  public deleteById: IRequestHandler = async (req, res) => {
+  public deleteById: IRequestHandler = async (
+    req, res,
+  ) => {
     await this.userService.deleteById(Number(req.params.id));
     res.sendStatus(204);
   };
