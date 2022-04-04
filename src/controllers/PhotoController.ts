@@ -1,21 +1,15 @@
-import {
-  IController,
-} from "../types/IController";
+import { IController } from "../types/IController";
 import PhotoService from "../services/PhotoService";
-import {
-  IRequestHandler,
-} from "../types/IRequestHandler";
+import { IRequestHandler } from "../types/IRequestHandler";
 import Photo from "../entities/Photo";
 import {
   PhotoDto,
   PhotoMapper,
 } from "../mappers/PhotoMapper";
-import {
-  PhotoGetRequest,
-} from "../types/Photo/PhotoGetRequest";
-import {
-  IMapper,
-} from "../mappers/IMapper";
+import { PhotoGetRequest } from "../types/Photo/PhotoGetRequest";
+import { IMapper } from "../mappers/IMapper";
+import { PhotoUpdateRequest } from "../types/Photo/PhotoUpdateRequest";
+import { PhotoCreateRequest } from "../types/Photo/PhotoCreateRequest";
 
 /**
  * Handle HTTP requests for Photos
@@ -61,6 +55,7 @@ class PhotoController implements IController {
       { withUserId: withUserId === "true" },
     );
 
+    console.log(this.photoMapper.toDto(photo));
     res.status(200).json({ data: this.photoMapper.toDto(photo) });
   };
 
@@ -70,7 +65,7 @@ class PhotoController implements IController {
    * @param req
    * @param res
    */
-  public create: IRequestHandler = async (
+  public create: IRequestHandler<PhotoCreateRequest> = async (
     req, res,
   ) => {
     const photo = await this.photoService.create(req.body);
@@ -84,7 +79,7 @@ class PhotoController implements IController {
    * @param req
    * @param res
    */
-  public updateById: IRequestHandler = async (
+  public updateById: IRequestHandler<PhotoUpdateRequest> = async (
     req, res,
   ) => {
     const photoUpdatePayload = req.body;

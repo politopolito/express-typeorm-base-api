@@ -1,10 +1,8 @@
-import {
-  Repository,
-} from "typeorm";
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types */
+import { Repository } from "typeorm";
 
 type IRepository<T> = Repository<T> & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  findById(id: number, options: any): Promise<T>;
+  findById?(id: number, options: any): Promise<T>;
 };
 
 export default IRepository;

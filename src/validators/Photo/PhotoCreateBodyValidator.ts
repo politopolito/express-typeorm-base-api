@@ -5,9 +5,7 @@ import {
   IsOptional,
   IsString,
 } from "class-validator";
-import {
-  Type,
-} from "class-transformer";
+import { Type } from "class-transformer";
 
 /**
  * Validate photo's create request body
@@ -27,7 +25,7 @@ export default class PhotoCreateBodyValidator {
 
   @IsBoolean()
   @IsOptional()
-    isPublic: boolean;
+    isPublic?: boolean;
 
   @IsInt()
   @IsNotEmpty()

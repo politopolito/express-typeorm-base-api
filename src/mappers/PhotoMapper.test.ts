@@ -1,20 +1,11 @@
-import Photo from "../entities/Photo";
-import User from "../entities/User";
 import { PhotoMapper } from "./PhotoMapper";
+import getPhotoMock from "../mocks/PhotoMock";
 
 describe(
   "PhotoMapper", () => {
     it(
       "Photo to PhotoDto", () => {
-        const photo = Photo.build({
-          createdAt  : new Date().toDateString(),
-          description: "",
-          filename   : "",
-          id         : 1,
-          isPublic   : true,
-          updatedAt  : new Date().toDateString(),
-          user       : { id: 1 } as User,
-        });
+        const photo = getPhotoMock();
 
         const photoDto = new PhotoMapper().toDto(photo);
 

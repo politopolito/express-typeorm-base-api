@@ -1,9 +1,10 @@
 import sinon from "sinon";
-import { Repository } from "typeorm";
+import { stubInterface } from "ts-sinon";
 import UserService from "./UserService";
 import getUserMock from "../mocks/UserMock";
 import NotFoundException from "../exceptions/NotFoundException";
-import { UserRole } from "../entities/User";
+import User, { UserRole } from "../entities/User";
+import IRepository from "../types/IRepository";
 
 describe(
   "UserService", () => {
@@ -15,7 +16,7 @@ describe(
       "getById success", async () => {
         // Given
         const userMock = getUserMock();
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
 
         // When
         fakeRepo.findOneBy.resolves(userMock);
@@ -33,7 +34,7 @@ describe(
     it(
       "getById not found", async () => {
         // Given
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
 
         // When
         fakeRepo.findOneBy.resolves(null);
@@ -52,7 +53,7 @@ describe(
       "getByEmail success", async () => {
         // Given
         const userMock = getUserMock();
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
 
 
         // When
@@ -71,7 +72,7 @@ describe(
     it(
       "getByEmail not found", async () => {
         // Given
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
 
         // When
         fakeRepo.findOneBy.resolves(null);
@@ -92,7 +93,7 @@ describe(
       "create success", async () => {
         // Given
         const userMock = getUserMock();
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
         const userInput = {
           email: "test@example.com",
           role : UserRole.CONTRACTOR,
@@ -114,7 +115,7 @@ describe(
     it(
       "create fails due to missing params", async () => {
         // Given
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
 
         // When
         fakeRepo.save.throws();
@@ -141,7 +142,7 @@ describe(
           ...userMock,
           email: "new@example.com",
         };
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
         const getById = sinon.fake.resolves(userMock);
 
         // When
@@ -188,7 +189,7 @@ describe(
     it(
       "deleteById success", async () => {
         // Given
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
 
         // When
         fakeRepo.delete.resolves({
@@ -209,7 +210,7 @@ describe(
     it(
       "deleteById should throw when not found", async () => {
         // Given
-        const fakeRepo = sinon.createStubInstance(Repository);
+        const fakeRepo = stubInterface<IRepository<User>>();
 
         // When
         fakeRepo.delete.resolves({
