@@ -1,9 +1,11 @@
 import { Request } from "express";
+import { AuthData } from "../types/Auth/RequestWithAuth";
 
 export type RequestParams = {
-  [k in "headers" | "params" | "query" | "auth"]?: Record<string, string>;
+  [k in "headers" | "params" | "query"]?: Record<string, string>;
 } & {
   body?: Record<string, string | boolean | number>;
+  auth?: AuthData;
 };
 
 const getRequestMock = <T = Request>(params: RequestParams = {}) => ({

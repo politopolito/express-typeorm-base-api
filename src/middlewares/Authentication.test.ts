@@ -2,7 +2,10 @@ import sinon from "sinon";
 import { AuthenticationMiddleware } from "./Authentication";
 import getRequestMock from "../mocks/RequestMock";
 import NotAuthenticatedException from "../exceptions/NotAuthenticatedException";
-import { RequestWithAuth } from "../types/Auth/RequestWithAuth";
+import {
+  AuthData,
+  RequestWithAuth,
+} from "../types/Auth/RequestWithAuth";
 import getUserMock from "../mocks/UserMock";
 import UserService from "../services/UserService";
 import NotFoundException from "../exceptions/NotFoundException";
@@ -40,7 +43,7 @@ describe(
         const middleware = new AuthenticationMiddleware(
           null, fakeUserService,
         ).use();
-        const req = getRequestMock<RequestWithAuth>({ auth: { sub: "test" } });
+        const req = getRequestMock<RequestWithAuth>({ auth: { sub: "test" } as AuthData });
         const next = sandbox.stub();
 
         // When
@@ -64,7 +67,7 @@ describe(
         const middleware = new AuthenticationMiddleware(
           null, fakeUserService,
         ).use();
-        const req = getRequestMock<RequestWithAuth>({ auth: { sub: "test" } });
+        const req = getRequestMock<RequestWithAuth>({ auth: { sub: "test" } as AuthData });
         const next = sandbox.stub();
 
         // When
@@ -76,6 +79,7 @@ describe(
         // Then
         expect(req.auth.user).toEqual(userMock);
         expect(req.auth.isAuthenticated).toBe(true);
+        expect(next.calledOnce).toBeTruthy();
       },
     );
   },
