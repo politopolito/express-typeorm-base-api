@@ -40,7 +40,7 @@ export class AuthenticationMiddleware implements IMiddleware {
       req: RequestWithAuth, _res: Response, next: NextFunction,
     ) => {
       // If req.auth is not populated then not authenticated
-      if (!req.auth) throw new NotAuthenticatedException();
+      if (!req.auth?.sub) throw new NotAuthenticatedException();
 
       try {
         const user = await this.userService.getByKey(
