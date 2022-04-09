@@ -11,15 +11,15 @@ export interface PhotoGetQueryOptions {
  */
 const photoRepository = (): IRepository<Photo> => Database.getConnection().getRepository(Photo)
   .extend({
-    findById(
-      id: number, options?: PhotoGetQueryOptions,
+    findOneByKey(
+      key, val, options?: PhotoGetQueryOptions,
     ): Promise<Photo> {
       const relations = [];
 
       if (options.withUserId) relations.push("user");
       return this.findOne({
         relations,
-        where: { id },
+        where: { [key]: val },
       });
     },
   });

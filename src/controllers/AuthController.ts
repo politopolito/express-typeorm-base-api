@@ -34,7 +34,9 @@ class AuthController extends UserController {
     let user: User;
 
     try {
-      user = await this.userService.getByEmail(req.user.email);
+      user = await this.userService.getByKey(
+        "auth0Id", req.auth.sub,
+      );
     } catch (e) {
       if (e instanceof NotFoundException) {
         const {
@@ -42,6 +44,7 @@ class AuthController extends UserController {
         } = req.user;
 
         user = await this.userService.create({
+          auth0Id  : req.auth.sub,
           avatarImg: picture,
           email,
           role     : UserRole.CONTRACTOR,

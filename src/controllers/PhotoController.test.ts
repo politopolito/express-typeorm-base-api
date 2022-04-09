@@ -33,15 +33,17 @@ describe(
         const controller = new PhotoController(fakeService);
 
         // When
-        fakeService.getById.resolves(photoMock);
+        fakeService.getByKey.resolves(photoMock);
 
         await controller.getById(
           fakeReq, fakeRes as any, null,
         );
 
         // Then
-        expect(fakeService.getById.calledOnceWithExactly(
-          1, { withUserId: true },
+        expect(fakeService.getByKey.calledOnceWithExactly(
+          "id",
+          1,
+          { withUserId: true },
         )).toBeTruthy();
         expect(fakeRes.json.calledOnceWithExactly({ data: new PhotoMapper().toDto(photoMock) }))
           .toBeTruthy();
@@ -61,14 +63,14 @@ describe(
         const controller = new PhotoController(fakeService);
 
         // When
-        fakeService.getById.throws(new NotFoundException());
+        fakeService.getByKey.throws(new NotFoundException());
 
         // Then
         await expect(controller.getById(
           fakeReq, fakeRes as any, null,
         )).rejects.toThrow(NotFoundException);
-        expect(fakeService.getById.calledOnceWithExactly(
-          1, { withUserId: true },
+        expect(fakeService.getByKey.calledOnceWithExactly(
+          "id", 1, { withUserId: true },
         )).toBeTruthy();
       },
     );

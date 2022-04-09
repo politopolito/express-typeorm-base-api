@@ -7,6 +7,8 @@ import UserUpdateBodyValidator from "../validators/User/UserUpdateBodyValidator"
 import paramsValidator from "../middlewares/ParamsValidator";
 import UserUpdateParamsValidator from "../validators/User/UserUpdateParamsValidator";
 import UserGetParamsValidator from "../validators/User/UserGetParamsValidator";
+import authentication from "../middlewares/Authentication";
+import JWTCheck from "../middlewares/JWTCheck";
 
 /**
  * Router for Users
@@ -25,18 +27,38 @@ class UserRouter implements IRouter {
 
   initializeRoutes() {
     this.router.get(
-      `${this.path}/:id(\\d+)`, paramsValidator(UserGetParamsValidator), this.userController.getById,
+      `${this.path}/:id(\\d+)`,
+      JWTCheck.use(),
+      authentication.use(),
+      paramsValidator(UserGetParamsValidator),
+      this.userController.getById,
     );
+
     this.router.patch(
-      `${this.path}/:id(\\d+)`, paramsValidator(UserUpdateParamsValidator), bodyValidator(
+      `${this.path}/:id(\\d+)`,
+      JWTCheck.use(),
+      authentication.use(),
+      paramsValidator(UserUpdateParamsValidator),
+      bodyValidator(
         UserUpdateBodyValidator, true,
-      ), this.userController.updateById,
+      ),
+      this.userController.updateById,
     );
+
     this.router.delete(
-      `${this.path}/:id(\\d+)`, paramsValidator(UserUpdateParamsValidator), this.userController.deleteById,
+      `${this.path}/:id(\\d+)`,
+      JWTCheck.use(),
+      authentication.use(),
+      paramsValidator(UserUpdateParamsValidator),
+      this.userController.deleteById,
     );
+
     this.router.post(
-      this.path, bodyValidator(UserCreateBodyValidator), this.userController.create,
+      this.path,
+      JWTCheck.use(),
+      authentication.use(),
+      bodyValidator(UserCreateBodyValidator),
+      this.userController.create,
     );
   }
 }

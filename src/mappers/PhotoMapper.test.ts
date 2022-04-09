@@ -15,6 +15,7 @@ describe(
           filename   : photo.filename,
           id         : photo.id,
           isPublic   : photo.isPublic,
+          name       : photo.name,
           updatedAt  : new Date(photo.updatedAt),
           userId     : photo.user.id,
         });

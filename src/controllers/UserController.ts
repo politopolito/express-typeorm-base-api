@@ -48,7 +48,9 @@ class UserController implements IController {
   public getById: IRequestHandler = async (
     req, res,
   ) => {
-    const user = await this.userService.getById(Number(req.params.id));
+    const user = await this.userService.getByKey(
+      "id", Number(req.params.id),
+    );
 
     res.status(200).json({
       data: this.userMapper.toDto(user),

@@ -50,12 +50,12 @@ class PhotoController implements IController {
     req, res,
   ) => {
     const { withUserId } = req.query;
-    const photo = await this.photoService.getById(
+    const photo = await this.photoService.getByKey(
+      "id",
       Number(req.params.id),
       { withUserId: withUserId === "true" },
     );
 
-    console.log(this.photoMapper.toDto(photo));
     res.status(200).json({ data: this.photoMapper.toDto(photo) });
   };
 

@@ -13,42 +13,48 @@ describe(
     afterEach(() => sandbox.restore());
 
     it(
-      "getById success", async () => {
+      "getByKey success", async () => {
         // Given
         const photoMock = getPhotoMock();
         const fakeRepo = stubInterface<IRepository<Photo>>();
 
         // When
-        fakeRepo.findById.resolves(photoMock);
+        fakeRepo.findOneByKey.resolves(photoMock);
         sandbox.replace(
           PhotoService.prototype, "getRepository", () => fakeRepo,
         );
-        const res = await new PhotoService().getById(photoMock.id);
+        const res = await new PhotoService().getByKey(
+          "id", photoMock.id,
+        );
 
         // Then
-        expect(fakeRepo.findById.calledOnceWithExactly(
-          photoMock.id, undefined,
+        expect(fakeRepo.findOneByKey.calledOnceWithExactly(
+          "id",
+          photoMock.id,
+          undefined,
         )).toBeTruthy();
         expect(res).toEqual(photoMock);
       },
     );
 
     it(
-      "getById not found", async () => {
+      "getByKey not found", async () => {
         // Given
         const fakeRepo = stubInterface<IRepository<Photo>>();
 
         // When
-        fakeRepo.findById.resolves(null);
+        fakeRepo.findOneByKey.resolves(null);
         sandbox.replace(
           PhotoService.prototype, "getRepository", () => fakeRepo,
         );
         const userService = new PhotoService();
 
         // Then
-        await expect(userService.getById(999)).rejects.toThrow(NotFoundException);
-        expect(fakeRepo.findById.calledOnceWithExactly(
-          999, undefined,
+        await expect(userService.getByKey(
+          "id", 999,
+        )).rejects.toThrow(NotFoundException);
+        expect(fakeRepo.findOneByKey.calledOnceWithExactly(
+          "id", 999, undefined,
         )).toBeTruthy();
       },
     );
@@ -114,12 +120,12 @@ describe(
           name: "new_photo",
         };
         const fakeRepo = stubInterface<IRepository<Photo>>();
-        const getById = sinon.fake.resolves(photoMock);
+        const getByKey = sinon.fake.resolves(photoMock);
 
         // When
         fakeRepo.save.resolvesArg(0);
         sandbox.replace(
-          PhotoService.prototype, "getById", getById,
+          PhotoService.prototype, "getByKey", getByKey,
         );
         sandbox.replace(
           PhotoService.prototype, "getRepository", () => fakeRepo,
@@ -129,7 +135,9 @@ describe(
         );
 
         // Then
-        expect(getById.calledOnceWithExactly(photoMock.id)).toBeTruthy();
+        expect(getByKey.calledOnceWithExactly(
+          "id", photoMock.id,
+        )).toBeTruthy();
         expect(fakeRepo.save.calledOnceWithExactly({
           ...photoMock,
           name: expectedPhoto.name,
@@ -141,11 +149,11 @@ describe(
     it(
       "updateById not found", async () => {
         // Given
-        const getById = sinon.fake.throws(new NotFoundException(""));
+        const getByKey = sinon.fake.throws(new NotFoundException(""));
 
         // When
         sandbox.replace(
-          PhotoService.prototype, "getById", getById,
+          PhotoService.prototype, "getByKey", getByKey,
         );
         const userService = new PhotoService();
 
@@ -153,7 +161,9 @@ describe(
         await expect(userService.updateById(
           999, {},
         )).rejects.toThrow(NotFoundException);
-        expect(getById.calledOnceWithExactly(999)).toBeTruthy();
+        expect(getByKey.calledOnceWithExactly(
+          "id", 999,
+        )).toBeTruthy();
       },
     );
 

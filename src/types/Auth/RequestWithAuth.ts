@@ -1,6 +1,7 @@
 import {
   Request,
 } from "express";
+import User from "../../entities/User";
 
 export interface RequestWithAuth extends Request {
   auth: {
@@ -11,5 +12,7 @@ export interface RequestWithAuth extends Request {
     exp: number;
     azp: string;
     scope: string;
+    isAuthenticated?: boolean;
+    user?: User;
   }
 }

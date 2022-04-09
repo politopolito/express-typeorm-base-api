@@ -15,7 +15,7 @@ export interface PhotoDto {
 /**
  * Photo mapper for serializing
  */
-export class PhotoMapper implements IMapper<Photo, PhotoDto>{
+export class PhotoMapper implements IMapper<Photo, PhotoDto> {
   toDto(p: Photo): PhotoDto {
     return {
       createdAt  : new Date(p.createdAt),

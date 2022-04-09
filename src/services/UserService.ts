@@ -10,7 +10,7 @@ import NotFoundException from "../exceptions/NotFoundException";
 /**
  * Handle business logic for User using Data Mapper & Repository pattern.
  */
-export default class UserService implements IService<User>{
+export default class UserService implements IService<User> {
   /**
    * Get available repository with established connection to a data storage
    * @private
@@ -29,34 +29,22 @@ export default class UserService implements IService<User>{
   ) => `User ${key}:${val} not found`;
 
   /**
-   * Gets user by id
-   * Success: existing user
-   * @param id
+   * Get user by a given key and val
+   * @param key
+   * @param val
    */
-  public async getById(id: number): Promise<User> {
-    const user = await this.getRepository().findOneBy({ id });
+  public async getByKey(
+    key: string,
+    val: number | string,
+  ): Promise<User> {
+    const user = await this.getRepository().findOneBy({ [key]: val });
 
     if (!user) {
       throw new NotFoundException(UserService.notFoundErrorMessage(
-        "id", id,
+        key, val,
       ));
     }
-    return user;
-  }
 
-  /**
-   * Gets user by auth0 id
-   * Success: existing user
-   * @param email
-   */
-  public async getByEmail(email: string): Promise<User> {
-    const user = await this.getRepository().findOneBy({ email });
-
-    if (!user) {
-      throw new NotFoundException(UserService.notFoundErrorMessage(
-        "email", email,
-      ));
-    }
     return user;
   }
 
@@ -78,7 +66,9 @@ export default class UserService implements IService<User>{
   public async updateById(
     id: number, userUpdateData: UserUpdateBodyValidator,
   ): Promise<User> {
-    const user = await this.getById(id);
+    const user = await this.getByKey(
+      "id", id,
+    );
     const repo = this.getRepository();
 
     return repo.save({
