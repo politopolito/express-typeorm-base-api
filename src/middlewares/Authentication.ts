@@ -10,11 +10,9 @@ import UserService from "../services/UserService";
 import NotFoundException from "../exceptions/NotFoundException";
 
 /**
- * Authentication middleware JWT-based
- * Default behavior:
- * Extract access_token from the "Authorization" header
- * as an OAuth2 Bearer Token
- * and populate req.auth
+ * Authentication middleware based on req.auth information
+ * Get user information based on req.auth
+ * And populate with user entity information
  */
 export class AuthenticationMiddleware implements IMiddleware {
   protected static initMessage = "AuthenticationMiddleware :: Setup authentication middleware...";

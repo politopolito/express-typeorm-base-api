@@ -8,6 +8,7 @@ import paramsValidator from "../middlewares/ParamsValidator";
 import UserUpdateParamsValidator from "../validators/User/UserUpdateParamsValidator";
 import UserGetParamsValidator from "../validators/User/UserGetParamsValidator";
 import authentication from "../middlewares/Authentication";
+import authorization from "../middlewares/Authorization";
 import JWTCheck from "../middlewares/JWTCheck";
 
 /**
@@ -30,6 +31,7 @@ class UserRouter implements IRouter {
       `${this.path}/:id(\\d+)`,
       JWTCheck.use(),
       authentication.use(),
+      authorization.use(),
       paramsValidator(UserGetParamsValidator),
       this.userController.getById,
     );
@@ -38,6 +40,7 @@ class UserRouter implements IRouter {
       `${this.path}/:id(\\d+)`,
       JWTCheck.use(),
       authentication.use(),
+      authorization.use(),
       paramsValidator(UserUpdateParamsValidator),
       bodyValidator(
         UserUpdateBodyValidator, true,
@@ -49,6 +52,7 @@ class UserRouter implements IRouter {
       `${this.path}/:id(\\d+)`,
       JWTCheck.use(),
       authentication.use(),
+      authorization.use(),
       paramsValidator(UserUpdateParamsValidator),
       this.userController.deleteById,
     );
@@ -57,6 +61,7 @@ class UserRouter implements IRouter {
       this.path,
       JWTCheck.use(),
       authentication.use(),
+      authorization.use(),
       bodyValidator(UserCreateBodyValidator),
       this.userController.create,
     );

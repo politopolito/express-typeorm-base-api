@@ -89,6 +89,9 @@ export default class User extends IEntityWithFactoryMethod {
   )
     photos?: Photo[];
 
-  @Column({ default: UserRole.CONTRACTOR })
+  @Column({
+    default: UserRole.CONTRACTOR,
+    enum   : UserRole,
+  })
     role: UserRole;
 }
