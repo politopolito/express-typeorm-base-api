@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -28,6 +29,13 @@ export enum UserRole {
 export default class User extends IEntityWithFactoryMethod {
   @PrimaryGeneratedColumn()
     id: number;
+
+  @Index({
+    unique: true,
+    where : "'auth0Id' IS NOT NULL",
+  })
+  @Column({ nullable: true })
+    auth0Id?: string;
 
   @CreateDateColumn()
     createdAt?: string;
@@ -81,6 +89,9 @@ export default class User extends IEntityWithFactoryMethod {
   )
     photos?: Photo[];
 
-  @Column({ default: UserRole.CONTRACTOR })
+  @Column({
+    default: UserRole.CONTRACTOR,
+    enum   : UserRole,
+  })
     role: UserRole;
 }

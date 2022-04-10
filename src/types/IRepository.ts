@@ -2,7 +2,7 @@
 import { Repository } from "typeorm";
 
 type IRepository<T> = Repository<T> & {
-  findById?(id: number, options: any): Promise<T>;
+  findOneByKey?(key: string, val: string | number, options: any): Promise<T>;
 };
 
 export default IRepository;

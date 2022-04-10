@@ -1,16 +1,14 @@
-import {
-  Request,
-} from "express";
+import { Request } from "express";
 import jwt from "express-jwt";
-import {
-  JWTCheckMiddleware,
-} from "./JWTCheck";
+import { JWTCheckMiddleware } from "./JWTCheck";
 import Config from "../providers/Config";
 
 /**
  * Authentication middleware for id_token
  * Extract JWT from the X-OIDC header as an JWT
  * It will populate req.user
+ * This should only be used during user sign up; X-OIDC is an application token
+ * that will not be present in most requests.
  */
 class OIDCheckMiddleware extends JWTCheckMiddleware {
   protected static initMessage = "OIDCheck :: Mounting X-OIDC JWT validator...";

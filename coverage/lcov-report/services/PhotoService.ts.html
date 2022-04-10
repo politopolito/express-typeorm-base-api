@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.47% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/19</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.75% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/16</span>
+                <span class='fraction'>16/17</span>
             </div>
         
             
@@ -152,7 +152,17 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -177,6 +187,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,6 +206,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,7 +238,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -238,6 +256,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,7 +273,7 @@ import IRepository from "../types/IRepository";
 /**
  * Handle business logic for Photo using Data Mapper &amp; Repository pattern.
  */
-export default class PhotoService implements IService&lt;Photo&gt;{
+export default class PhotoService implements IService&lt;Photo&gt; {
   /**
    * Get available repository with established connection to a data storage
    * @private
@@ -264,24 +284,31 @@ export default class PhotoService implements IService&lt;Photo&gt;{
 &nbsp;
   /**
    * Error message for NotFoundException
-   * @param id
+   * @param key
+   * @param val
    */
-  private static notFoundErrorMessage = (id: number) =&gt; `Photo id:${id} not found`;
+  private static notFoundErrorMessage = (
+    key: string, val: string | number,
+  ) =&gt; `Photo ${key}:${val} not found`;
 &nbsp;
   /**
-   * Gets photo by id
-   * Success: existing photo
-   * @param id
+   * Get Photo by key-value pair
+   * @param key
+   * @param val
    * @param options
    */
-  public async getById(
-    id: number, options?: PhotoGetQueryOptions,
+  public async getByKey(
+    key: string, val: string | number, options?: PhotoGetQueryOptions,
   ): Promise&lt;Photo&gt; {
-    const photo = await this.getRepository().findById(
-      id, options,
+    const photo = await this.getRepository().findOneByKey(
+      key, val, options,
     );
 &nbsp;
-    if (!photo) throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
+    if (!photo) {
+      throw new NotFoundException(PhotoService.notFoundErrorMessage(
+        key, val,
+      ));
+    }
     return photo;
   }
 &nbsp;
@@ -308,9 +335,10 @@ export default class PhotoService implements IService&lt;Photo&gt;{
   public async updateById(
     id: number, photoUpdateDate: PhotoUpdateBodyValidator,
   ): Promise&lt;Photo&gt; {
-    const photo = await this.getById(id);
+    const photo = await this.getByKey(
+      "id", id,
+    );
 &nbsp;
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (!photo) <span class="cstat-no" title="statement not covered" >throw new NotFoundException(PhotoService.notFoundErrorMessage(id));</span>
     return this.getRepository().save({
       ...photo,
       ...photoUpdateDate,
@@ -326,7 +354,9 @@ export default class PhotoService implements IService&lt;Photo&gt;{
     const deleteData = await this.getRepository().delete({ id });
 &nbsp;
     if (deleteData.affected === 0) {
-      throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
+      throw new NotFoundException(PhotoService.notFoundErrorMessage(
+        "id", id,
+      ));
     }
   }
 }
@@ -337,7 +367,7 @@ export default class PhotoService implements IService&lt;Photo&gt;{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Apr 04 2022 11:22:48 GMT-0300 (Argentina Standard Time)
+                at Sat Apr 09 2022 11:47:57 GMT-0300 (Argentina Standard Time)
             </div>
         <script src="../prettify.js"></script>
         <script>

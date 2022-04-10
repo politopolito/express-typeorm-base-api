@@ -10,7 +10,7 @@ import IRepository from "../types/IRepository";
 /**
  * Handle business logic for Photo using Data Mapper & Repository pattern.
  */
-export default class PhotoService implements IService<Photo>{
+export default class PhotoService implements IService<Photo> {
   /**
    * Get available repository with established connection to a data storage
    * @private
@@ -21,24 +21,31 @@ export default class PhotoService implements IService<Photo>{
 
   /**
    * Error message for NotFoundException
-   * @param id
+   * @param key
+   * @param val
    */
-  private static notFoundErrorMessage = (id: number) => `Photo id:${id} not found`;
+  private static notFoundErrorMessage = (
+    key: string, val: string | number,
+  ) => `Photo ${key}:${val} not found`;
 
   /**
-   * Gets photo by id
-   * Success: existing photo
-   * @param id
+   * Get Photo by key-value pair
+   * @param key
+   * @param val
    * @param options
    */
-  public async getById(
-    id: number, options?: PhotoGetQueryOptions,
+  public async getByKey(
+    key: string, val: string | number, options?: PhotoGetQueryOptions,
   ): Promise<Photo> {
-    const photo = await this.getRepository().findById(
-      id, options,
+    const photo = await this.getRepository().findOneByKey(
+      key, val, options,
     );
 
-    if (!photo) throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
+    if (!photo) {
+      throw new NotFoundException(PhotoService.notFoundErrorMessage(
+        key, val,
+      ));
+    }
     return photo;
   }
 
@@ -65,9 +72,10 @@ export default class PhotoService implements IService<Photo>{
   public async updateById(
     id: number, photoUpdateDate: PhotoUpdateBodyValidator,
   ): Promise<Photo> {
-    const photo = await this.getById(id);
+    const photo = await this.getByKey(
+      "id", id,
+    );
 
-    if (!photo) throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
     return this.getRepository().save({
       ...photo,
       ...photoUpdateDate,
@@ -83,7 +91,9 @@ export default class PhotoService implements IService<Photo>{
     const deleteData = await this.getRepository().delete({ id });
 
     if (deleteData.affected === 0) {
-      throw new NotFoundException(PhotoService.notFoundErrorMessage(id));
+      throw new NotFoundException(PhotoService.notFoundErrorMessage(
+        "id", id,
+      ));
     }
   }
 

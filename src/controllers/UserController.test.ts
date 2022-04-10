@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// noinspection JSVoidFunctionReturnValueUsed
+
 import sinon from "sinon";
 import UserController from "./UserController";
 import getUserMock from "../mocks/UserMock";
@@ -21,23 +23,25 @@ describe(
     afterEach(() => sandbox.restore());
 
     it(
-      "getById should return 200 and user on success and found user", async () => {
+      "getByKey should return 200 and user on success and found user", async () => {
         // Given
         const userMock = getUserMock();
-        const fakeService = sinon.createStubInstance(UserService);
+        const fakeService = sandbox.createStubInstance(UserService);
         const fakeReq = getRequestMock({ params: { id: "1" } });
         const fakeRes = getResponseMock();
         const controller = new UserController(fakeService);
 
         // When
-        fakeService.getById.resolves(userMock);
+        fakeService.getByKey.resolves(userMock);
 
         await controller.getById(
           fakeReq, fakeRes as any, null,
         );
 
         // Then
-        expect(fakeService.getById.calledOnceWithExactly(userMock.id)).toBeTruthy();
+        expect(fakeService.getByKey.calledOnceWithExactly(
+          "id", userMock.id,
+        )).toBeTruthy();
         expect(fakeRes.json.calledOnceWithExactly({ data: new UserMapper().toDto(userMock) }))
           .toBeTruthy();
         expect(fakeRes.status.calledOnceWithExactly(200)).toBeTruthy();
@@ -45,21 +49,23 @@ describe(
     );
 
     it(
-      "getById should bubble up exception", async () => {
+      "getByKey should bubble up exception", async () => {
         // Given
-        const fakeService = sinon.createStubInstance(UserService);
+        const fakeService = sandbox.createStubInstance(UserService);
         const fakeReq = getRequestMock({ params: { id: "1" } });
         const fakeRes = getResponseMock();
         const controller = new UserController(fakeService);
 
         // When
-        fakeService.getById.throws(new NotFoundException());
+        fakeService.getByKey.throws(new NotFoundException());
 
         // Then
         await expect(controller.getById(
           fakeReq, fakeRes as any, null,
         )).rejects.toThrow(NotFoundException);
-        expect(fakeService.getById.calledOnceWithExactly(1)).toBeTruthy();
+        expect(fakeService.getByKey.calledOnceWithExactly(
+          "id", 1,
+        )).toBeTruthy();
       },
     );
 
@@ -67,7 +73,7 @@ describe(
       "create should return 201 status code and user on success", async () => {
         // Given
         const userMock = getUserMock();
-        const fakeService = sinon.createStubInstance(UserService);
+        const fakeService = sandbox.createStubInstance(UserService);
         const userCreateBody: UserCreateBody = {
           avatarUrl: userMock.avatarUrl,
           email    : userMock.email,
@@ -99,7 +105,7 @@ describe(
     it(
       "create should should bubble up exception", async () => {
         // Given
-        const fakeService = sinon.createStubInstance(UserService);
+        const fakeService = sandbox.createStubInstance(UserService);
         const fakeReq = getRequestMock({});
         const fakeRes = getResponseMock();
         const controller = new UserController(fakeService);
@@ -123,7 +129,7 @@ describe(
           ...getUserMock(),
           ...userUpdateBody,
         } as User;
-        const fakeService = sinon.createStubInstance(UserService);
+        const fakeService = sandbox.createStubInstance(UserService);
         const fakeReq: UserCreateRequest = getRequestMock({
           body  : userUpdateBody,
           params: { id: "1" },
@@ -152,7 +158,7 @@ describe(
       "updateById should bubble up exception", async () => {
         // Given
         const userUpdateBody: UserUpdateBody = { email: "new@example.com" };
-        const fakeService = sinon.createStubInstance(UserService);
+        const fakeService = sandbox.createStubInstance(UserService);
         const fakeReq = getRequestMock({
           body  : userUpdateBody,
           params: { id: "1" },
@@ -176,7 +182,7 @@ describe(
     it(
       "deleteById should return 204 on success", async () => {
         // Given
-        const fakeService = sinon.createStubInstance(UserService);
+        const fakeService = sandbox.createStubInstance(UserService);
         const fakeReq = getRequestMock({ params: { id: "1" } });
         const fakeRes = getResponseMock();
         const controller = new UserController(fakeService);
@@ -198,7 +204,7 @@ describe(
     it(
       "deleteById should bubble up exception", async () => {
         // Given
-        const fakeService = sinon.createStubInstance(UserService);
+        const fakeService = sandbox.createStubInstance(UserService);
         const fakeReq = getRequestMock({ params: { id: "1" } });
         const fakeRes = getResponseMock();
         const controller = new UserController(fakeService);

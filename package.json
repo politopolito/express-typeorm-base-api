@@ -1,7 +1,10 @@
 {
   "name": "uncharted-be",
   "version": "1.0.0",
-  "repository": "https://github.com/herrera-ignacio/uncharted-be.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herrera-ignacio/uncharted-be.git"
+  },
   "author": "Ignacio Herrera <ignacioromanherrera@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -55,5 +58,12 @@
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.0"
-  }
+  },
+  "description": "1. Install dependencies: `yarn install`.\r 2. Configure prettier ([see docs](https://prettier.io/docs/en/editors.html))\r 3. Download `.env` file from drive's folder and place in project root (see [.env.base](.env.base) as an example).\r 4. Run with `yarn dev`.\r 5. (Optional) You can run [React Auth0 Example](https://github.com/herrera-ignacio/react-auth0-example) app if you want to test authentication. You'll have to setup your auth0 secrets properly.",
+  "bugs": {
+    "url": "https://github.com/herrera-ignacio/uncharted-be/issues"
+  },
+  "homepage": "https://github.com/herrera-ignacio/uncharted-be#readme",
+  "main": "jest.config.js",
+  "keywords": []
 }
